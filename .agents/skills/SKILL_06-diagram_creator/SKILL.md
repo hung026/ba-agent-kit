@@ -20,8 +20,9 @@ Create various type of diagrams: sequence diagrams, flowcharts, activity diagram
 
 | Diagram type | Reference File |
 |-------|----------------|
-| Sequence Diagram  | `.agents\template\Sequence Diagram\sequence_diagram_template.md` |
-| Activity Diagram  | `.agents\template\Activity Diagram\activity_diagram_template.md` |
+| Sequence Diagram  | `template\Sequence Diagram\sequence_diagram_template.md` |
+| Activity Diagram  | `template\Activity Diagram\activity_diagram_template.md` |
+| Entity Relationship Diagram  | `template\ERD\ERD_template.md` |
 
 ## Output format
 - Output should be in markdown format with language `plantuml`.
@@ -33,6 +34,6 @@ Create various type of diagrams: sequence diagrams, flowcharts, activity diagram
 ```
 
 ### 3. Save output
-- Save the generated diagram in the user workspace under the `.agents\output\diagram\` directory.
+- Save the generated diagram in the user workspace under the `.workspace\output\diagram\` directory.
 - File name format: `{usecase_name}.md` (e.g. UC-1.md , login.md, chatbot.md). Feel free to set a name that match the requirement.
 ---
