@@ -60,10 +60,10 @@
 
 #### 5 Luồng Ngoại lệ / Lỗi (Exception / Error Flow)
 
-| ID Luồng | Bước | Lỗi | Cơ chế fallback |  BR liên quan(nếu có) |
-| :--- | :--- | :--- | :--- | :--- |
-| EF-01 | Bước | | |  |
-| EF-02 | Bước | | |  |
+| ID Luồng | Bước | Lỗi | Xử lý | Cơ chế fallback | BR liên quan(nếu có) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| EF-01 | Bước | | |  | |
+| EF-02 | Bước | | |  | |
 
 ---
 

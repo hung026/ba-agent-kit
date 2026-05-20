@@ -41,8 +41,6 @@ For each use case, systematically check:
 **For each edge case found, document:**
 ```
 Scenario: [What happens]
-Detection: [How system knows]
-User Feedback: [What user sees]
 System Action: [What system does]
 Fallback: [If primary handling also fails]
 ```
@@ -61,17 +59,24 @@ Ask these questions explicitly — if you can't answer them, flag as open questi
 
 ---
 
-## 2.4 Number & Metric Sourcing
+## 2.4 Learn from knowledge base
 
-Every numeric threshold or KPI must be annotated:
+- **MUST**: For each doc type, load the corresponding knowledge base file from `knowledge_base/{doc_type}_knowledge_base.md`, then go through every rule in the knowledge base file to ensure the document follows it accurately.
 
+- Use knowledge_base as a lesson learned from previous projects, to avoid old mistakes and improve the document quality.
+
+## 2.5 Number & Metric Sourcing
+
+Every metric/number must be annotated with source or formula.
+
+Example:
 ```
+Monthly interest rate ← Formula: ((Balance * Interest_rate) / 100) / 30 * No_of_days
 Response time ≤ 200ms   ← Source: PRD section 3.2
-Uptime ≥ 99.9%          ← Source: Industry standard
 Max file size: TBD      ← Source: TBD — confirm with Tech Lead
 ```
 
-Never invent numbers. If no source exists → mark as TBD.
+Never invent number with no source or no formula.
 
 ---
 
