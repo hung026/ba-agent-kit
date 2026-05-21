@@ -2,11 +2,19 @@
 
 **Goal:** Think deeply before writing. Surface edge cases, blindspots, and risks the input didn't mention.
 
-**First:** Load `knowledge_base/{DOC_TYPE}_knowledge_base.md` for the confirmed doc type. Apply its criteria throughout this stage.
+**First:** Load `doc-factory\knowledge_base\{DOC_TYPE}_knowledge_base.md` for the confirmed doc type. Apply its criteria throughout this stage.
 
 ---
 
-## 2.1 Multi-Lens Analysis
+## 2.1 Learn from knowledge base
+
+- **MUST**: For each doc type, load the corresponding knowledge base file from `doc-factory\knowledge_base\{doc_type}_knowledge_base.md`, then go through every rule in the knowledge base file to ensure the document follows it accurately.
+
+- Use knowledge_base as a lesson learned from previous projects, to avoid old mistakes and improve the document quality.
+
+---
+
+## 2.2 Multi-Lens Analysis
 
 For each use case in confirmed scope, run through all three lenses:
 
@@ -20,7 +28,7 @@ Document every gap found. These feed directly into the draft.
 
 ---
 
-## 2.2 Edge Case Sweep
+## 2.3 Edge Case Sweep
 
 For each use case, systematically check:
 
@@ -47,7 +55,7 @@ Fallback: [If primary handling also fails]
 
 ---
 
-## 2.3 Blindspot Check
+## 2.4 Blindspot Check
 
 Ask these questions explicitly — if you can't answer them, flag as open question:
 
@@ -58,12 +66,6 @@ Ask these questions explicitly — if you can't answer them, flag as open questi
 - What assumptions is this doc making that haven't been validated?
 
 ---
-
-## 2.4 Learn from knowledge base
-
-- **MUST**: For each doc type, load the corresponding knowledge base file from `knowledge_base/{doc_type}_knowledge_base.md`, then go through every rule in the knowledge base file to ensure the document follows it accurately.
-
-- Use knowledge_base as a lesson learned from previous projects, to avoid old mistakes and improve the document quality.
 
 ## 2.5 Number & Metric Sourcing
 
@@ -80,7 +82,7 @@ Never invent number with no source or no formula.
 
 ---
 
-## 2.5 Sensitive Data Flags
+## 2.6 Sensitive Data Flags
 
 If any use case involves the following → add `⚠ Sensitive data. Legal check required.` in the doc:
 
