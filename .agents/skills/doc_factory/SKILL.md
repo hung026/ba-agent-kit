@@ -3,7 +3,7 @@ name: doc-factory
 description: "The document generation engine. Use this skill when the user requests any formal BA document — BRD, Use Case Specification, or User Story. Triggers on: 'Viết tài liệu', 'viết BRD', 'Viết user stories', 'Viết đặc tả', or any request to produce BA/product documentation even without naming the doc type. Always use this skill before writing any structured requirements document — do not freehand it."
 ---
 
-# SKILL_05 — DOC_FACTORY
+# doc_factory SKILL
 
 ## Purpose
 
@@ -19,8 +19,8 @@ Input (chat / text / file)
         ▼
 [Gate] Assess Input Readiness
         │
-        ├─ Too vague       → Handoff to SKILL_01
-        ├─ Missing data    → Handoff to SKILL_02
+        ├─ Too vague       → Handoff to analyst_advisor SKILL
+        ├─ Missing data    → Handoff to research_analyst SKILL
         └─ Sufficient ─────────────────────────┐
                                                │
                                                ▼
@@ -52,9 +52,9 @@ Input (chat / text / file)
 
 | Input State | Action |
 |---|---|
-| Vague, no clear requirements | "Recommend **SKILL_01** to analyze first." |
-| Requirements exist but need research | "Recommend **SKILL_02** to gather data first." |
-| Input from SKILL_01 / SKILL_02 | Skip gate → Stage 1 |
+| Vague, no clear requirements | "Recommend **analyst_advisor SKILL** to analyze first." |
+| Requirements exist but need research | "Recommend **research_analyst SKILL** to gather data first." |
+| Input from analyst_advisor SKILL / research_analyst SKILL | Skip gate → Stage 1 |
 | Clear enough | → Stage 1 |
 
 Minimum bar: actors identified + core functionality described + rough scope exists.

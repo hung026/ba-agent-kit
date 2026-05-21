@@ -10,7 +10,7 @@ description:
   " Hãy phân tích...", "Làm thế nào...", "Gợi ý cho tôi..."or any input where scope, actors, or outcomes are unclear.
 ---
 
-# SKILL_01 — ANALYST_ADVISOR
+# analyst_advisor SKILL
 
 ## Purpose
 
@@ -27,7 +27,7 @@ proposals — through structured elicitation, blind spot detection, and solution
 - Ask sharp, prioritized questions to uncover hidden requirements
 - Surface blind spots, risks, and unstated assumptions
 - Propose solution directions with trade-off analysis
-- Determine when external research is needed and hand off to SKILL_02
+- Determine when external research is needed and hand off to research_analyst SKILL
 
 ---
 
@@ -48,7 +48,7 @@ Classify: Medium or Complex
     ▼
 Stage 1: Elicit (ask up to 5 critical questions)
     │
-    ├─ Need external data? ──Yes──► Hand off to SKILL_02, resume after
+    ├─ Need external data? ──Yes──► Hand off to research_analyst SKILL, resume after
     │
     ▼
 User confirm to continue? (MUST HAVE)
@@ -59,7 +59,7 @@ User confirm to continue? (MUST HAVE)
 Stage 2: Critical Analysis (blind spots, risks, assumptions)
     │
     ├─ New critical gap found? ──Yes──► Loop back to Stage 1
-    ├─ Need domain research? ──Yes──► Hand off to SKILL_02, resume after
+    ├─ Need domain research? ──Yes──► Hand off to research_analyst SKILL, resume after
     │
     ▼
 Stage 3: Solution Proposal (1-3 options + recommendation)
@@ -68,16 +68,16 @@ Stage 3: Solution Proposal (1-3 options + recommendation)
 Output + Recommended Next SKILL
 ```
 
-At any stage, if external data is needed → **hand off to SKILL_02 (RESEARCH_ANALYST)** and resume after results are available.
+At any stage, if external data is needed → **hand off to research_analyst SKILL** and resume after results are available.
 
 ---
 
 ## Pipeline Decision Rules
 
 - **Gate → Direct Answer** if: input is Simple (factual, zero ambiguity, well-defined)
-- **Stage 1 → SKILL_02** if: elicitation reveals a need for external data
+- **Stage 1 → research_analyst SKILL** if: elicitation reveals a need for external data
 - **Stage 2 → Stage 1** if: analysis surfaces a critical gap not yet asked about
-- **Stage 2 → SKILL_02** if: blind spot detection reveals an unknown domain/regulation
+- **Stage 2 → research_analyst SKILL** if: blind spot detection reveals an unknown domain/regulation
 - **Never skip Stage 2** for Complex inputs — unexamined blind spots are the highest-risk failure mode
 
 ---

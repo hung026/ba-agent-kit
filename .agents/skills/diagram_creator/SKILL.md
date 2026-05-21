@@ -3,7 +3,7 @@ name: diagram-creator
 description: Use this skill whenever a user wants a visual diagram — sequence, flowchart, activity diagram,... If the user specifies the diagram type, the skill goes straight to create the diagram. If not, ask for diagram type.
 ---
 
-# SKILL_06: DIAGRAM_CREATOR
+# diagram_creator SKILL
 
 ## Purpose
 Create various type of diagrams: sequence diagrams, flowcharts, activity diagrams,... based on user input.
