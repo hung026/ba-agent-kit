@@ -3,8 +3,6 @@
 ## Metadata
 - **Project**: FoodOrder — Ứng dụng đặt đồ ăn
 - **Platform**: Mobile App
-- **Source document**: FoodOrder-SRS.docx
-- **Analyzed date**: 2026-05-20
 - **Total screens**: 14 (screens: 8, modals: 2, popups: 2, toasts: 2)
 - **Total modules**: 4
 - **User roles**: Customer

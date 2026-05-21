@@ -4,11 +4,8 @@ description: >
   Đọc tài liệu đặc tả (SRS, user story, PRD) và trích xuất ra bản đặc tả màn hình có cấu trúc —
   bao gồm danh sách screen, component, navigation flow, fake data spec, và state definitions.
   Output dùng làm input cho cả prototype coding lẫn UI design.
-  Sử dụng skill này khi user muốn phân tích SRS, phân tích tài liệu đặc tả, liệt kê màn hình từ spec,
-  tạo screen map, tạo screen inventory, chuẩn bị đặc tả cho prototype, hoặc bất kỳ yêu cầu nào
-  liên quan đến việc chuyển đổi tài liệu yêu cầu phần mềm thành danh sách màn hình và luồng tương tác.
-  Trigger cả khi user nói "liệt kê màn hình", "screen map",
-  "chuẩn bị cho prototype", "analyze requirements", hoặc upload file SRS/PRD/user story.
+  Sử dụng skill này khi user muốn chuyển đổi tài liệu yêu cầu phần mềm thành danh sách màn hình và luồng tương tác.
+  Trigger khi user nói "mô tả màn hình", "liệt kê màn hình", "screen map", "chuẩn bị cho prototype"
 ---
 
 # SPEC ANALYZER
@@ -20,12 +17,12 @@ Output phục vụ 2 mục đích:
 1. **Input cho prototype coding** — đủ chi tiết để code ra interactive prototype với fake data
 2. **Input cho UI/UX design** — đủ thông tin để designer dựng wireframe/mockup
 
-**Skill này KHÔNG:**
+**DON'T:**
 - Tự code prototype (→ dùng skill prototype-generator)
 - Tạo design/wireframe (→ dùng Figma hoặc design tool)
 - Viết lại SRS hoặc chỉnh sửa yêu cầu
 
-**Skill này LÀM:**
+**DO:**
 - Đọc và hiểu tài liệu đặc tả
 - Trích xuất tất cả màn hình (screens, modals, popups, toasts, bottom sheets, error states)
 - Map navigation flow giữa các màn hình
@@ -37,19 +34,11 @@ Output phục vụ 2 mục đích:
 
 ## Input Handling
 
-### File upload (docx, md, pdf)
-1. Kiểm tra file tại `/mnt/user-data/uploads/`
-2. Đọc nội dung:
-   - `.docx` → `extract-text <file>`
-   - `.md`, `.txt` → `cat <file>`
-   - `.pdf` → Dùng skill `/mnt/skills/public/pdf-reading/SKILL.md`
-3. Nếu file quá dài (>50KB), đọc theo từng phần và tổng hợp
+### Text hoặc chat history
+Nếu user paste text trực tiếp trong chat hoặc có sẵn trong lịch sử chat → dùng ngay, không cần đọc file.
 
-### Pasted text
-Nếu user paste text trực tiếp trong chat → dùng ngay, không cần đọc file.
-
-### Nhiều file
-Nếu user upload nhiều file → đọc tất cả, tổng hợp thành 1 bản phân tích duy nhất.
+### Upload file
+Nếu user upload 1 hay nhiều file → đọc tất cả, tổng hợp thành 1 bản phân tích duy nhất.
 
 ---
 
@@ -98,7 +87,7 @@ Nguyên tắc cốt lõi:
 - Mỗi "view" mà user nhìn thấy = 1 screen entry (kể cả modal, popup, toast, bottom sheet)
 - Đặt ID theo format: `S-XXX` (screen), `M-XXX` (modal/bottom sheet), `T-XXX` (toast/snackbar), `P-XXX` (popup/dialog)
 - Nhóm screens theo feature/module
-- Nếu SRS mô tả 1 tính năng nhưng không nêu rõ các màn → suy luận ra các màn hình cần thiết và đánh dấu `[inferred]`
+- Nếu tài liệu mô tả 1 tính năng nhưng không nêu rõ các màn → suy luận ra các màn hình cần thiết và đánh dấu `[inferred]`
 
 ---
 

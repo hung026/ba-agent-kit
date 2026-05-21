@@ -1,6 +1,4 @@
 1. Còn thiếu
-- Vẽ mock (html css)
-- Connect với Stich vẽ mockup (design figma)
 - SRS
   - Thêm temp mixpanel
   - BR phải đánh 1-2-3 theo UC, không tăng dần
@@ -13,7 +11,8 @@
   - Thêm changelog ở đầu tài liệu
 
 2. SKILL mới:
-- Mô tả từ design có sẵn
+- Mô tả màn hình từ design có sẵn để cho vào SRS
+- Gắn mô tả design vào doc hoàn chỉnh
 - Thêm design exractor để lấy design system
 - Đánh giá ảnh hưởng + sửa doc
 - Review doc
@@ -24,12 +23,12 @@
 - Thêm skill BABOK vào SKILL_01
 
 4. Nice-to-have
-- Connect sẵn figma, gg doc, plantUML
 - /Compact cho anti và cowork
 
 5. HƯỚNG DẪN
-- Thêm HDSD cho team
 - Cài workflow sẵn để chạy /init nếu cần
+
+
 
 
 6. Gemini.md

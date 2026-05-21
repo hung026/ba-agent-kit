@@ -18,25 +18,27 @@
 For each option, output this block:
 
 ```
-### Option [N]: [Name]
+### Option [N]: [Tên]
 
-**Approach:** [2–3 sentences. What it is, how it works.]
+**Giải pháp:**
+[2-3 câu. Giải thích nó là gì. Cách hoạt động thế nào. Trình bày dạng bullet point]
 
 **Pros:**
-- [concrete benefit]
-- [concrete benefit]
+- [Ưu điểm 1]
+- [Ưu điểm 2]
 
 **Cons:**
-- [concrete limitation]
-- [concrete limitation]
+- [Nhược điểm 1]
+- [Nhược điểm 2]
 
-**Risks:** [🔴 Critical / 🟡 Important] — [1-line description per risk, drawn from Stage 2 findings]
+**Rủi ro:**
+[🔴 Critical / 🟡 Important] — [Mô tả ngắn gọn rủi ro, dựa trên kết quả từ Stage 2 ]
 
-**Effort / Time-to-value / Risk Level:** [Low|Med|High] / [weeks/months] / [Low|Med|High]
+**Áp dụng khi:**
+[Giải pháp này tốt nhất cho trường hợp nào]
 
-**Best for:** [the context or constraint where this option wins]
-
-**Sources:** [URL or "No external data used"] ← required if data came from `research-analyst` SKILL
+**Sources:**
+[URL or "Không sử dụng dữ liệu bên ngoài"] ← bắt buộc nếu dữ liệu đến từ `research-analyst` SKILL
 ```
 ---
 
@@ -45,13 +47,16 @@ For each option, output this block:
 Output exactly this block — keep it short:
 
 ```
-## ⭐ Recommendation: Option [N] — [Name]
+## ⭐ ĐỀ XUẤT: Option [N] — [Tên]
 
-**Why:** [2–3 sentences. Reference constraints + key Stage 2 findings.]
+**Lý do:**
+[2-3 câu. Giải thích tại sao chọn option này, dựa trên kết quả từ Stage 2]
 
-**Condition to reconsider:** [What would make a different option better]
+**Cân nhắc:**
+[Khi nào nên quay lại cân nhắc các option khác]
 
-**What this doesn't solve:** [Honest gaps — 1–3 bullet points]
+**Vấn đề:**
+[Các hạn chế. Trình bày gạch đầu dòng]
 ```
 
 ---
