@@ -46,8 +46,8 @@ Before any question, consider: What are they assuming? What impact haven't they 
 
 ## Step 5: Research Hand-off
 
-If gaps need market data, regulations, or unfamiliar domain context → hand off to `skills\research_analyst\SKILL.md`
+If gaps need market data, regulations, or unfamiliar domain context → hand off to `skills\research-analyst\SKILL.md`
 
 ## Exit
 
-Complete when: All P1 resolved or assumed. All P2 resolved, assumed, or flagged for research_analyst SKILL. Assumptions documented.
+Complete when: All P1 resolved or assumed. All P2 resolved, assumed, or flagged for `research-analyst` SKILL. Assumptions documented.

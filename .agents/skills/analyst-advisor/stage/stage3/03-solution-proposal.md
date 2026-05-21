@@ -36,7 +36,7 @@ For each option, output this block:
 
 **Best for:** [the context or constraint where this option wins]
 
-**Sources:** [URL or "No external data used"] ← required if data came from research_analyst SKILL
+**Sources:** [URL or "No external data used"] ← required if data came from `research-analyst` SKILL
 ```
 ---
 
@@ -60,10 +60,10 @@ Output exactly this block — keep it short:
 
 | Situation | Next |
 |---|---|
-| Ready for documentation | → doc_factory SKILL |
-| Need impact assessment | → impact_analyzer SKILL |
-| Need diagrams | → diagram_creator SKILL |
-| Need more data | → research_analyst SKILL |
+| Ready for documentation | → `doc-factory` SKILL |
+| Need impact assessment | → `impact-analyzer` SKILL |
+| Need diagrams | → `diagram-creator` SKILL |
+| Need more data | → `research-analyst` SKILL |
 | Stakeholder must decide first | → Wait |
 
 ---
@@ -73,4 +73,4 @@ Output exactly this block — keep it short:
 - [ ] All Stage 1 questions addressed?
 - [ ] All 🔴 Stage 2 findings reflected in at least one option's risks?
 - [ ] Options are genuinely different?
-- [ ] No fabricated data — sources cited if research_analyst SKILL was used?
+- [ ] No fabricated data — sources cited if `research-analyst` SKILL was used?

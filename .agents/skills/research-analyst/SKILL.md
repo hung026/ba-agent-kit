@@ -1,18 +1,18 @@
 ---
 name: research-analyst
 description:
-  Data-gathering engine for analyst_advisor SKILL. Searches, verifies, and feeds back
+  Data-gathering engine for `analyst-advisor` SKILL. Searches, verifies, and feeds back
   cited findings as input — no standalone research document produced.
 tools: [google_search]
 ---
 
-# research_analyst SKILL
+# `research-analyst` SKILL
 
 ## Purpose
 
-Supply verified external data to enrich analyst_advisor SKILL analysis. This skill gathers, cross-references, and returns findings **as input for analyst_advisor SKILL** — not as a standalone deliverable.
+Supply verified external data to enrich `analyst-advisor` SKILL analysis. This skill gathers, cross-references, and returns findings **as input for `analyst-advisor` SKILL** — not as a standalone deliverable.
 
-**Does NOT:** Analyze, propose solutions (→ analyst_advisor SKILL), write documents (→ doc_factory SKILL / diagram_creator SKILL), decide.
+**Does NOT:** Analyze, propose solutions (→ `analyst-advisor` SKILL), write documents (→ `doc-factory` SKILL / `diagram-creator` SKILL), decide.
 **DOES:** Search autonomously, verify across sources, return cited data with links.
 
 ---
@@ -23,7 +23,7 @@ Supply verified external data to enrich analyst_advisor SKILL analysis. This ski
 - **Quick lookup** (single fact, 1-2 queries) → Search, verify, return. Done.
 - **Deep research** (comparison, trends, multi-angle) → Full pipeline.
 
-From **analyst_advisor SKILL hand-off** → skip gate, topic already scoped.
+From **`analyst-advisor` SKILL hand-off** → skip gate, topic already scoped.
 
 ---
 
@@ -47,5 +47,5 @@ Every finding must include:
 
 ## Handoff
 
-- Return gathered data to `skills\analyst_advisor\stage\stage2\02-critical-analysis.md` for analysis.
+- Return gathered data to `skills\analyst-advisor\stage\stage2\02-critical-analysis.md` for analysis.
 - Attach the *Source Format* in the answer as evidence.
