@@ -31,8 +31,3 @@ endif
 stop
 @enduml
 ```
-```
-**Mô tả:**
-- [3–5 sentence plain-text summary of main flow and key branches.]
-- [Callout for notable decision points or edge cases.]
-```

@@ -1,1 +1,0 @@
-# `impact-analyzer` SKILL

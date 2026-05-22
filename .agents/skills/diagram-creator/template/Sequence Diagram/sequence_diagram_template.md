@@ -39,11 +39,6 @@ end
 @enduml
 ```
 ```
-**Description:**
-- [3–5 sentence plain-text summary.]
-```
-
-```
 **API table:**
 | API Name | Purpose | Method | Request Format | Response Format | Authentication |
 |----------|---------|--------|----------------|-----------------|----------------|

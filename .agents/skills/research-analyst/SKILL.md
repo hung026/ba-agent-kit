@@ -6,7 +6,7 @@ description:
 tools: [google_search]
 ---
 
-# `research-analyst` SKILL
+# research-analyst SKILL
 
 ## Purpose
 

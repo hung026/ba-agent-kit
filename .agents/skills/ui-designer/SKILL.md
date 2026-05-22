@@ -9,4 +9,3 @@ description: "Use this skill when the user wants to create UI designs. The skill
 Create UI designs based on the `DESIGN.md` file and provided documents (screen analyzer document) from users
 
 ## Workflow
-1. Read the documents 

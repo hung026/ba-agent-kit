@@ -1,6 +1,0 @@
-# Reference Tool 
-
-Some helpful links/tools that can be used during your work:
-1. View diagram: https://editor.plantuml.com/
-2. Build prototype: https://aistudio.google.com/
-3. Design: https://stitch.withgoogle.com/

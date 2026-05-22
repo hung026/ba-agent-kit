@@ -10,7 +10,7 @@ description:
   " Hãy phân tích...", "Làm thế nào...", "Gợi ý cho tôi..."or any input where scope, actors, or outcomes are unclear.
 ---
 
-# `analyst-advisor` SKILL
+# analyst-advisor SKILL
 
 ## Purpose
 

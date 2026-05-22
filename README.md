@@ -46,4 +46,3 @@ Tính năng này dùng để ........
 
 ## Bảo mật
 1. Mask thông tin khi chat
-2. Nếu cần nhắc đến tên sản phẩm. thống nhất là `V-shield`
