@@ -8,7 +8,7 @@
 ```markdown
 # [Tên Dự án/Tính năng] - Đặc tả Use Case
 
-## 1. Tóm tắt Thực thi
+## 1. Tổng quan
 
 [Tổng quan ngắn gọn: chúng ta đang xây dựng cái gì và tại sao]
 
@@ -28,7 +28,7 @@
 | ------------------------ | -------- |
 | ID Use Case | |
 | Tên Use Case | |
-| Mô tả ngắn gọn | |
+| Mô tả | |
 | Actor chính | |
 | Điều kiện trước | |
 | Kích hoạt (Trigger) | |
@@ -104,7 +104,7 @@
 | --- | -------------- |
 | ID Use Case | UC-001 |
 | Tên Use Case | Đăng ký User |
-| Mô tả ngắn gọn | User đăng ký tài khoản mới |
+| Mô tả | User đăng ký tài khoản mới |
 | Actor chính | User |
 | Điều kiện tiên quyết | Thiết bị của User có kết nối internet |
 | Kích hoạt (Trigger) | User nhấn "Tạo tài khoản mới" |

@@ -1,102 +1,102 @@
 # Extraction Rules
 
-Quy tắc trích xuất màn hình từ tài liệu đặc tả. Đọc file này khi bắt đầu Step 2.
+Rules for extracting screens from requirement documents. Read this file before starting Step 2.
 
 ---
 
-## 1. Phân loại Screen Entry
+## 1. Screen Entry Classification
 
-Mỗi "view" mà user nhìn thấy trên thiết bị = 1 screen entry.
+Every "view" the user sees on the device = 1 screen entry.
 
-| Type | Prefix | Mô tả | Ví dụ |
-|------|--------|--------|-------|
-| Screen | `S-` | Màn hình full, chiếm toàn bộ viewport | Login, Home, Profile, Settings |
-| Modal / Bottom Sheet | `M-` | Overlay chiếm 1 phần viewport, có backdrop | Filter modal, Date picker, Confirm dialog |
-| Popup / Dialog | `P-` | Dialog nhỏ, thường có 2 nút (confirm/cancel) | Delete confirmation, Logout confirmation |
-| Toast / Snackbar | `T-` | Thông báo tạm thời, tự biến mất | "Saved successfully", "Network error" |
+| Type | Prefix | Description | Examples |
+|------|--------|-------------|----------|
+| Screen | `S-` | Full screen, occupies the entire viewport | Login, Home, Profile, Settings |
+| Modal / Bottom Sheet | `M-` | Overlay occupying part of the viewport with a backdrop | Filter modal, Date picker, Confirm dialog |
+| Popup / Dialog | `P-` | Small dialog, usually with 2 buttons (confirm/cancel) | Delete confirmation, Logout confirmation |
+| Toast / Snackbar | `T-` | Temporary notification, auto-dismisses | "Saved successfully", "Network error" |
 
-### Quy tắc đánh số
-- Format: `{Prefix}{Module number}{Screen number}` — ví dụ: `S-0101`, `M-0201`
-- Module number: 2 chữ số (01, 02, 03,...)
-- Screen number: 2 chữ số trong module (01, 02, 03,...)
-- Ví dụ: Module 01 (Auth) có 3 screens → `S-0101`, `S-0102`, `S-0103`
-
----
-
-## 2. Nguồn trích xuất
-
-Screens được trích xuất từ các nguồn sau trong SRS:
-
-### Nguồn trực tiếp (explicit)
-- **Use case descriptions**: Mỗi bước trong use case flow thường tương ứng 1 screen hoặc interaction
-- **User story**: "As a user, I want to see a list of..." → list screen
-- **UI requirements section**: Nếu SRS có section mô tả UI
-- **Wireframe/mockup references**: Nếu SRS đề cập đến tên màn hình cụ thể
-- **Screen flow diagrams**: Nếu có sẵn
-
-### Nguồn suy luận (inferred)
-- **Authentication flow**: Nếu SRS đề cập đến login → suy luận: Login screen, Register screen, Forgot password screen, OTP verification screen
-- **CRUD operations**: Nếu SRS nói "quản lý X" → suy luận: List X, Detail X, Create/Edit X, Delete confirmation
-- **Search/Filter**: Nếu SRS đề cập tìm kiếm → suy luận: Search screen hoặc search bar + filter modal
-- **Settings**: Nếu SRS đề cập cài đặt → suy luận: Settings list, các sub-settings screens
-- **Notifications**: Nếu đề cập → suy luận: Notification list, notification detail
-- **Error handling**: Mọi form đều cần error states, mọi API call đều có thể fail
-- **Empty states**: Mọi list screen đều cần empty state
-- **Onboarding**: Nếu có tính năng phức tạp → xem xét thêm onboarding flow
-
-Mọi screen suy luận phải được đánh dấu `[inferred]` để user biết và verify.
+### Numbering Rules
+- Format: `{Prefix}{Module number}{Screen number}` — e.g., `S-0101`, `M-0201`
+- Module number: 2 digits (01, 02, 03,...)
+- Screen number: 2 digits within the module (01, 02, 03,...)
+- Example: Module 01 (Auth) has 3 screens → `S-0101`, `S-0102`, `S-0103`
 
 ---
 
-## 3. Quy tắc nhóm Module
+## 2. Extraction Sources
 
-Nhóm screens theo feature/module. Thứ tự ưu tiên:
+Screens are extracted from the following SRS sources:
 
-1. **Theo SRS structure**: Nếu SRS đã chia module rõ ràng → theo SRS
-2. **Theo user flow**: Nếu SRS không chia rõ → nhóm theo luồng sử dụng
-3. **Mặc định phổ biến** (nếu không có gì rõ ràng):
+### Explicit Sources
+- **Use case descriptions**: Each step in a use case flow usually matches 1 screen or interaction
+- **User stories**: "As a user, I want to see a list of..." → list screen
+- **UI requirements section**: If the SRS has a UI description section
+- **Wireframe/mockup references**: If the SRS mentions specific screen names
+- **Screen flow diagrams**: If available
+
+### Inferred Sources
+- **Authentication flow**: If SRS mentions login → infer: Login, Register, Forgot password, OTP verification screens
+- **CRUD operations**: If SRS says "manage X" → infer: List X, Detail X, Create/Edit X, Delete confirmation
+- **Search/Filter**: If SRS mentions searching → infer: Search screen or search bar + filter modal
+- **Settings**: If SRS mentions settings → infer: Settings list, sub-settings screens
+- **Notifications**: If mentioned → infer: Notification list, notification detail
+- **Error handling**: All forms need error states, all API calls can fail
+- **Empty states**: All list screens need empty states
+- **Onboarding**: For complex features → consider adding an onboarding flow
+
+All inferred screens must be marked `[inferred]` for the user to know and verify.
+
+---
+
+## 3. Module Grouping Rules
+
+Group screens by feature/module. Priority order:
+
+1. **By SRS structure**: If the SRS clearly divides modules → follow the SRS
+2. **By user flow**: If not clearly divided → group by user flow
+3. **Common default** (if unclear):
    - Module 01: Authentication (login, register, forgot password)
-   - Module 02: Onboarding (nếu có)
+   - Module 02: Onboarding (if any)
    - Module 03: Home / Dashboard
-   - Module 04-N: Feature modules (theo thứ tự ưu tiên business)
-   - Module cuối-1: Settings / Profile
-   - Module cuối: Common (shared modals, toasts, errors)
+   - Module 04-N: Feature modules (by business priority)
+   - Last Module-1: Settings / Profile
+   - Last Module: Common (shared modals, toasts, errors)
 
 ---
 
-## 4. Xử lý trường hợp đặc biệt
+## 4. Special Cases Handling
 
-### SRS quá ngắn / thiếu chi tiết
-- Trích xuất những gì có
-- Suy luận phần còn lại dựa trên context
-- Đánh dấu rõ `[inferred]` và ghi note giải thích lý do suy luận
-- Hỏi user confirm trước khi tiến hành
+### SRS is too short / lacks details
+- Extract what is available
+- Infer the rest based on context
+- Clearly mark `[inferred]` and note the reasoning
+- Ask the user to confirm before proceeding
 
-### SRS quá dài / nhiều module
-- Liệt kê tất cả modules tìm được
-- Hỏi user muốn phân tích tất cả hay chọn modules cụ thể
-- Nếu > 30 screens: khuyến nghị chia thành nhiều phiên phân tích
+### SRS is too long / many modules
+- List all discovered modules
+- Ask the user whether to analyze all or select specific modules
+- If > 30 screens: recommend splitting into multiple analysis sessions
 
-### SRS có mâu thuẫn
-- Ghi nhận cả 2 phiên bản
-- Đánh dấu `[conflict]` và mô tả mâu thuẫn
-- Hỏi user quyết định
+### SRS has conflicts
+- Note both versions
+- Mark `[conflict]` and describe the conflict
+- Ask the user to decide
 
-### Nhiều user roles
-- Tạo screen entries riêng cho mỗi role nếu UI khác nhau
-- Nếu cùng screen nhưng khác quyền → 1 entry, ghi rõ conditional display logic
-- Ghi rõ role nào thấy screen nào trong navigation flow
+### Multiple user roles
+- Create separate screen entries for each role if the UI differs
+- If it's the same screen but different permissions → 1 entry, specify conditional display logic
+- Clearly state which role sees which screen in the navigation flow
 
 ---
 
-## 5. Checklist trước khi hoàn thành
+## 5. Pre-completion Checklist
 
-Trước khi chuyển sang Step 3, verify:
+Before moving to Step 3, verify:
 
-- [ ] Mọi use case / user story trong SRS đều đã có ít nhất 1 screen tương ứng
-- [ ] Mọi CRUD operation đều có đủ: List, Detail, Create/Edit, Delete confirm
-- [ ] Authentication flow đầy đủ (nếu có)
-- [ ] Error states và empty states đã được tính
-- [ ] Toast/snackbar cho các action chính đã có (save, delete, error)
-- [ ] Navigation entry points rõ ràng (tab bar, drawer, deep links)
-- [ ] Screens `[inferred]` đã được đánh dấu rõ ràng
+- [ ] Every use case / user story in the SRS has at least 1 corresponding screen
+- [ ] Every CRUD operation is complete: List, Detail, Create/Edit, Delete confirm
+- [ ] Authentication flow is complete (if any)
+- [ ] Error states and empty states are included
+- [ ] Toast/snackbar for main actions are present (save, delete, error)
+- [ ] Navigation entry points are clear (tab bar, drawer, deep links)
+- [ ] `[inferred]` screens are clearly marked

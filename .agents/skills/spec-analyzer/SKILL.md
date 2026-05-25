@@ -1,161 +1,161 @@
 ---
 name: spec-analyzer
 description: >
-  Đọc tài liệu đặc tả (SRS, user story, PRD) và trích xuất ra bản đặc tả màn hình có cấu trúc —
-  bao gồm danh sách screen, component, navigation flow, fake data spec, và state definitions.
-  Output dùng làm input cho cả prototype coding lẫn UI design.
-  Sử dụng skill này khi user muốn chuyển đổi tài liệu yêu cầu phần mềm thành danh sách màn hình và luồng tương tác.
-  Trigger khi user nói "mô tả màn hình", "liệt kê màn hình", "screen map", "chuẩn bị cho prototype"
+  Read requirement documents (SRS, user story, PRD) and extract a structured screen specification —
+  including screen lists, components, navigation flow, fake data specs, and state definitions.
+  The output serves as input for both prototype coding and UI design.
+  Use this skill when the user wants to convert software requirements into a screen list and interaction flow.
+  Trigger when the user says "liệt kê màn hình", "list ra các màn hình mockup", "chuẩn bị cho prototype", "chuẩn bị cho mockup"
 ---
 
 # SPEC ANALYZER
 
 ## Purpose
 
-Chuyển đổi tài liệu đặc tả phần mềm (SRS, user story, PRD) thành bản đặc tả màn hình có cấu trúc.
-Output phục vụ 2 mục đích:
-1. **Input cho prototype coding** — đủ chi tiết để code ra interactive prototype với fake data
-2. **Input cho UI/UX design** — đủ thông tin để designer dựng wireframe/mockup
+Convert software requirements (SRS, user story, PRD) into a structured screen specification.
+The output serves 2 purposes:
+1. **Input for prototype coding** — detailed enough to build an interactive prototype with fake data.
+2. **Input for UI/UX design** — sufficient info for designers to create wireframes/mockups.
 
 **DON'T:**
-- Tự code prototype (→ dùng skill prototype-generator)
-- Tạo design/wireframe (→ dùng Figma hoặc design tool)
-- Viết lại SRS hoặc chỉnh sửa yêu cầu
+- Code the prototype yourself (→ use prototype-generator skill)
+- Create designs/wireframes (→ use Figma or design tools)
+- Rewrite the SRS or modify requirements
 
 **DO:**
-- Đọc và hiểu tài liệu đặc tả
-- Trích xuất tất cả màn hình (screens, modals, popups, toasts, bottom sheets, error states)
-- Map navigation flow giữa các màn hình
-- Xác định components cần thiết cho từng màn
-- Định nghĩa fake data cần thiết cho demo
-- Liệt kê các trạng thái UI (loading, empty, error, success)
+- Read and understand the requirement document
+- Extract all screens (screens, modals, popups, toasts, bottom sheets, error states)
+- Map the navigation flow between screens
+- Identify necessary components for each screen
+- Define required fake data for the demo
+- List UI states (loading, empty, error, success)
 
 ---
 
 ## Input Handling
 
-### Text hoặc chat history
-Nếu user paste text trực tiếp trong chat hoặc có sẵn trong lịch sử chat → dùng ngay, không cần đọc file.
+### Text or chat history
+If the user pastes text directly or it exists in chat history → use it immediately, no file reading needed.
 
-### Upload file
-Nếu user upload 1 hay nhiều file → đọc tất cả, tổng hợp thành 1 bản phân tích duy nhất.
+### File upload
+If the user uploads one or more files → read all and consolidate into a single analysis.
 
 ---
 
 ## Pipeline
 
 ```
-Step 1: Đọc & Hiểu tài liệu
+Step 1: Read & Understand Doc
     │
     ▼
-Step 2: Trích xuất Screen Inventory
+Step 2: Extract Screen Inventory
     │
     ▼
-Step 3: Phân tích Components & Interactions
+Step 3: Analyze Components & Interactions
     │
     ▼
 Step 4: Map Navigation Flow
     │
     ▼
-Step 5: Định nghĩa Fake Data & States
+Step 5: Define Fake Data & States
     │
     ▼
-Step 6: Tổng hợp Output → Trình bày cho user review
+Step 6: Consolidate Output → Present for user review
 ```
 
 ---
 
-## Step 1: Đọc & Hiểu tài liệu
+## Step 1: Read & Understand Doc
 
-Mục tiêu: Nắm được toàn bộ scope của sản phẩm trước khi trích xuất chi tiết.
+Goal: Grasp the full product scope before detailed extraction.
 
-Đọc toàn bộ tài liệu và xác định:
-- Sản phẩm là gì? (mobile app, web portal, landing page)
-- Đối tượng người dùng (user roles/actors)
-- Các module/feature chính
-- Business flow tổng quan
+Read the entire doc and identify:
+- Product type (mobile app, web portal, landing page)
+- Target users (user roles/actors)
+- Main modules/features
+- Overall business flow
 
-Nếu tài liệu thiếu thông tin quan trọng (không rõ platform, không rõ user roles) → hỏi user trước khi tiếp tục.
-
----
-
-## Step 2: Trích xuất Screen Inventory
-
-Đọc `references/extraction-rules.md` để nắm quy tắc trích xuất chi tiết.
-
-Nguyên tắc cốt lõi:
-- Mỗi "view" mà user nhìn thấy = 1 screen entry (kể cả modal, popup, toast, bottom sheet)
-- Đặt ID theo format: `S-XXX` (screen), `M-XXX` (modal/bottom sheet), `T-XXX` (toast/snackbar), `P-XXX` (popup/dialog)
-- Nhóm screens theo feature/module
-- Nếu tài liệu mô tả 1 tính năng nhưng không nêu rõ các màn → suy luận ra các màn hình cần thiết và đánh dấu `[inferred]`
+If crucial info is missing (unclear platform, undefined roles) → ask the user before proceeding.
 
 ---
 
-## Step 3: Phân tích Components & Interactions
+## Step 2: Extract Screen Inventory
 
-Với mỗi screen, xác định:
+Read `references/extraction-rules.md` for detailed extraction rules.
+
+Core principles:
+- Every "view" the user sees = 1 screen entry (including modals, popups, toasts, bottom sheets)
+- Format IDs as: `S-XXX` (screen), `M-XXX` (modal/bottom sheet), `T-XXX` (toast/snackbar), `P-XXX` (popup/dialog)
+- Group screens by feature/module
+- If a feature is described but lacks explicit screens → infer necessary screens and mark as `[inferred]`
+
+---
+
+## Step 3: Analyze Components & Interactions
+
+For each screen, identify:
 - UI components (button, input, list, card, image, icon, tab, toggle,...)
-- Interaction behavior (tap → navigate, long press → show options, swipe → delete,...)
-- Form validation rules (nếu có form)
-- Conditional display logic (hiện/ẩn element dựa trên điều kiện gì)
+- Interaction behaviors (tap → navigate, long press → show options, swipe → delete,...)
+- Form validation rules (if any)
+- Conditional display logic (when to show/hide elements)
 
 ---
 
 ## Step 4: Map Navigation Flow
 
-Tạo navigation map:
-- Screen A → (trigger gì) → Screen B
+Create a navigation map:
+- Screen A → (trigger action) → Screen B
 - Back navigation
-- Deep link entries (nếu có)
+- Deep link entries (if any)
 - Tab bar / bottom navigation structure
 - Conditional navigation (login → home vs login → onboarding)
 
 ---
 
-## Step 5: Định nghĩa Fake Data & States
+## Step 5: Define Fake Data & States
 
-Với mỗi screen:
-- **Fake data**: Dữ liệu mẫu cần hardcode để demo (tên user, danh sách items, số liệu,...)
-- **States**: Các trạng thái UI cần thể hiện
-  - `default` — trạng thái bình thường, có data
-  - `loading` — đang tải (nếu áp dụng)
-  - `empty` — không có data
-  - `error` — lỗi xảy ra
-  - `success` — thao tác thành công
+For each screen:
+- **Fake data**: Hardcoded sample data for demo (user names, item lists, figures,...)
+- **States**: UI states to represent
+  - `default` — normal state with data
+  - `loading` — when fetching (if applicable)
+  - `empty` — no data available
+  - `error` — when an error occurs
+  - `success` — successful operation
 
-Chỉ liệt kê states thực sự cần thiết cho demo. Không cần liệt kê hết mọi state lý thuyết.
+Only list states practically needed for the demo. Do not list all theoretical states.
 
 ---
 
-## Step 6: Tổng hợp Output
+## Step 6: Consolidate Output
 
-Đọc `references/output-schema.md` để sử dụng đúng format output.
+Read `references/output-schema.md` to use the correct output format.
 
-Sau khi hoàn thành bản phân tích:
-1. Tạo file output theo đúng schema
-2. Trình bày cho user:
-   - Tóm tắt: bao nhiêu screens, bao nhiêu modules, bao nhiêu user roles
-   - Highlight các điểm đã suy luận thêm `[inferred]` — để user verify
-   - Highlight các điểm chưa rõ trong SRS — để user bổ sung
-3. Hỏi user confirm hoặc chỉnh sửa trước khi finalize
+After completing the analysis:
+1. Generate the output file following the schema
+2. Present it to the user:
+   - Summary: total screens, modules, user roles
+   - Highlight inferred items `[inferred]` — for user verification
+   - Highlight unclear points in the SRS — for user clarification
+3. Ask for confirmation or adjustments before finalizing
 
 ---
 
 ## Output Format
 
-Output là 1 file Markdown (.md) lưu tại `/mnt/user-data/outputs/`.
+The output is a Markdown (.md) file saved at `/mnt/user-data/outputs/`.
 
-Tên file: `[tên-project]-screen-spec.md`
+File name: `[project-name]-screen-spec.md`
 
-Cấu trúc output chi tiết: xem `references/output-schema.md`
-Ví dụ output hoàn chỉnh: xem `examples/sample-output.md`
+Detailed output structure: see `references/output-schema.md`
+Complete output example: see `examples/sample-output.md`
 
 ---
 
-## Lưu ý quan trọng
+## Important Notes
 
-1. **Không bỏ sót màn hình ẩn**: Modal confirm delete, toast success, error state, empty state — đều là screen entries
-2. **Suy luận hợp lý**: SRS thường không liệt kê hết mọi màn. Hãy suy luận thêm các màn cần thiết và đánh dấu `[inferred]`
-3. **Giữ ID nhất quán**: ID một khi đã assign thì không đổi. Nếu cần thêm screen sau, dùng ID tiếp theo
-4. **Mobile-first**: Mặc định phân tích theo mobile app. Nếu là web → ghi rõ trong metadata
-5. **Luôn hỏi confirm**: Không tự ý finalize. Luôn trình bày draft và hỏi user review
+1. **Do not miss hidden screens**: Confirm delete modals, success toasts, error/empty states — all are screen entries.
+2. **Logical inference**: SRS often omits some screens. Infer necessary screens and mark as `[inferred]`.
+3. **Consistent IDs**: Once assigned, IDs do not change. Add new screens using the next available ID.
+4. **Mobile-first**: Default to mobile app analysis. If web → specify in metadata.
+5. **Always ask for confirmation**: Do not finalize on your own. Always present a draft and ask for user review.
