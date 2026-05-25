@@ -52,9 +52,9 @@ Input (chat / text / file)
 
 | Input State | Action |
 |---|---|
-| Vague, no clear requirements | "Recommend `analyst-advisor` skil      l to analyze first." |
+| Vague, no clear requirements | "Recommend `analyst-advisor` skill to analyze first." |
 | Requirements exist but need research | "Recommend `research-analyst` skill to gather data first." |
-| Input from `analyst-advisor` / `research-analyst` | Skip gate → Stage 1 |
+| Input from `analyst-advisor` | Skip gate → Stage 1 |
 | Clear enough | → Stage 1 |
 
 Minimum bar: actors identified + core functionality described + rough scope exists.

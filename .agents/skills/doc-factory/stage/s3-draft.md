@@ -31,7 +31,10 @@ With: specific values, measurable criteria, explicit conditions.
 - Sensitive data flags → place inline next to the relevant field/data
 
 **Numbers must have sources.**
-Use the annotation format from Stage 2. Never invent.
+- Use the annotation format from Stage 2. Never invent.
+
+**ID Numbering Rule:** 
+- For each new Use Case, **MUST** reset the numbering of all internal IDs (such as AF-01, BR-01, EF-01) back to 01. Do not continue the numbering sequence from previous Use Cases.
 
 ---
 

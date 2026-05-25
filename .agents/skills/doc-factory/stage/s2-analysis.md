@@ -73,7 +73,7 @@ Every metric/number must be annotated with source or formula.
 
 Example:
 ```
-Monthly interest rate ← Formula: ((Balance * Interest_rate) / 100) / 30 * No_of_days
+Monthly interest rate   ← Formula: ((Balance * Interest_rate) / 100) / 30 * No_of_days
 Response time ≤ 200ms   ← Source: PRD section 3.2
 Max file size: TBD      ← Source: TBD — confirm with Tech Lead
 ```
