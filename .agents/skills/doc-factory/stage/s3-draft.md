@@ -10,7 +10,7 @@ From the template registry in SKILL.md, load the file for the confirmed doc type
 
 **Follow the template structure exactly.** Do not invent sections. Do not skip sections. Do not reorder.
 
-If a section has no content from the input → write "TBD" or "N/A — [reason]". Never leave blank.
+If a section has no content from the input → write "N/A". Never leave blank.
 
 ---
 

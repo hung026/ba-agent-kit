@@ -1,6 +1,6 @@
 ---
 name: doc-factory
-description: "The document generation engine. Use this skill when the user requests any formal BA document — BRD, Use Case Specification, or User Story. Triggers on: 'Viết tài liệu', 'viết BRD', 'Viết user stories', 'Viết đặc tả', or any request to produce BA/product documentation even without naming the doc type. Always use this skill before writing any structured requirements document — do not freehand it."
+description: "The document generation engine. Use this skill when the user requests any formal BA document — BRD, Use Case Specification, or User Story. Triggers on: 'Viết tài liệu', 'viết BRD', 'Viết user stories', 'Viết SRS', 'Viết đặc tả', or any request to produce BA/product documentation even without naming the doc type. Always use this skill before writing any structured requirements document — do not freehand it."
 ---
 
 # doc-factory SKILL
@@ -81,7 +81,7 @@ Each doc type has its own knowledge base file. Load it at the start of **Stage 2
 | Doc Type | Knowledge Base |
 |---|---|
 | BRD | `knowledge_base/BRD_knowledge_base.md` |
-| Use Case Spec | `knowledge_base/UC_knowledge_base.md` |
+| Use Case Spec / SRS | `knowledge_base/UC_knowledge_base.md` |
 | User Story | `knowledge_base/US_knowledge_base.md` |
 
 These files contain: key quality criteria, common mistakes, and lesson learnt from past docs. **Treat them as primary guidance — they override generic intuition.**
@@ -95,7 +95,7 @@ Load the correct template at **Stage 3**:
 | Doc Type | Template |
 |---|---|
 | BRD | `template/BRD/BRD_template.md` |
-| Use Case Spec | `template/Use Case/Usecase_template.md` |
+| Use Case Spec / SRS | `template/Use Case/Usecase_template.md` |
 | User Story | `template/User Story/User_story_template.md` |
 
 If user requests a doc type with no template → ask them to provide a format.

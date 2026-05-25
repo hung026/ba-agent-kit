@@ -37,7 +37,7 @@
 
 #### 2 Luồng chính (Happy Path)
 
-| Bước | Actor | Hành động / Phản hồi của Hệ thống | Quy tắc Nghiệp vụ liên quan |
+| Bước | Actor | Hành động / Phản hồi của Hệ thống | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- |
 | 1 | User | | BR |
 | 2 | Hệ thống | | BR |
@@ -46,7 +46,7 @@
 
 #### 3 Luồng thay thế (Alternative Flow)
 
-| ID Luồng | Bước | Mô tả | BR liên quan |
+| ID Luồng | Bước | Mô tả | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- |
 | AF-01 | Bước | | BR |
 | AF-02 | Bước | | BR |
@@ -69,6 +69,7 @@
 
 ## 5. Yêu cầu Phi chức năng (OPTIONAL)
 [Chỉ viết nếu tính năng có yêu cầu về NFR]
+
 | ID | Loại | Mô tả |
 | :--- | :--- | :--- |
 | NFR-01 | | |
@@ -112,7 +113,7 @@
 
 #### 2. Luồng chính (Happy Path)
 
-| Bước | Actor | Hành động / Phản hồi của Hệ thống | BR liên quan |
+| Bước | Actor | Hành động / Phản hồi của Hệ thống | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- |
 | 1 | User | Điều hướng đến trang đăng nhập | BR-01 |
 | 2 | User | Nhập email/tên đăng nhập và mật khẩu | BR-02 |
@@ -123,7 +124,7 @@
 
 #### 3. Luồng thay thế (Alternative Flow)
 
-| ID Luồng | Bước | Mô tả | BR liên quan |
+| ID Luồng | Bước | Mô tả | BR liên quan(nếu có)|
 | :--- | :--- | :--- | :--- |
 | AF-01 | Bước 2 | User chỉnh sửa thông tin trước khi gửi | BR-02 |
 | AF-02 | Bước 6 | User được chuyển hướng đến trang bảo mật truy cập cuối cùng | BR-07 |
@@ -144,7 +145,7 @@
 
 #### 5. Luồng Ngoại lệ / Lỗi (Exception / Error Flow)
 
-| ID Luồng | Bước | Lỗi | Cơ chế fallback | BR liên quan |
+| ID Luồng | Bước | Lỗi | Cơ chế fallback | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- | :--- |
 | EF-01 | Bước 4 | Định dạng email/tên đăng nhập không hợp lệ | Hiển thị thông báo lỗi định dạng | BR-04 |
 | EF-02 | Bước 5 | Sai tên đăng nhập hoặc mật khẩu | Hiển thị thông báo lỗi xác thực | BR-05 |

@@ -8,104 +8,104 @@
 ## Output format
 ```markdown
 # BUSINESS REQUIREMENT DOCUMENT (BRD)
-**Project:** [Project Name]
-**Module:** [Module Name/Feature Set]
-**Date:** [Today date]
-**Proposer:** `Business Analyst` by default
+**Dự án:** [Tên Dự án]
+**Module:** [Tên Module/Tập Tính năng]
+**Ngày:** [Ngày hiện tại]
+**Người đề xuất:** [Tên Người đề xuất, mặc định là `Business Analyst`]
 
 ---
 
-## 1. OVERVIEW & CONTEXT
-### 1.1. Document Objectives
-[Describe the purpose of the document and what the MVP or module aims to achieve].
+## 1. TỔNG QUAN
+### 1.1. Mục tiêu 
+[Mô tả mục đích của tài liệu và những gì MVP hoặc module hướng tới].
 
-### 1.2. Scope
-*   **In-Scope:** [List features or requirements included].
-*   **Out-of-Scope:** `All the features not mentioned in the In-Scope section.` by default.
+### 1.2. Phạm vi 
+*   **In-Scope:** [Liệt kê các tính năng hoặc yêu cầu bao gồm].
+*   **Out-of-Scope:** `Tất cả các tính năng không được đề cập trong phần In-Scope.` theo mặc định.
 
-### 1.3. Pain Points Addressed
-| Pain Point | Feature Solution | Impact |
+### 1.3. Pain Points
+| Pain Point | Giải pháp | Mức độ quan trọng |
 | :--- | :--- | :--- |
-| [Problem description] | [Feature ID] | [Critical/High/Medium] |
+| [Mô tả vấn đề] | [ID Tính năng] | [Critical/High/Medium] |
 
 ---
 
-## 2. DETAILED FUNCTIONAL REQUIREMENTS
-*Note: Repeat this sub-section for every functional requirement (FR-01, FR-02, etc.).*
+## 2. MÔ TẢ YÊU CẦU CHỨC NĂNG
+*Note: Lặp lại phần này cho mỗi tính năng (FR-01, FR-02, v.v.).*
 
-### [FR-ID]: [Feature Name]
-#### 2.1. Purpose
-[Describe the objective of the feature and the problem it solves].
+### [FR-ID]: [Tên Tính năng]
+#### 2.1. Mục tiêu
+[Mô tả mục tiêu của tính năng và vấn đề nó giải quyết].
 
-#### 2.2. Activity Flow (Happy Path)
-1. [Step 1]
-2. [Step 2]
-3. [System Response]
-4. [Result/Logging].
+#### 2.2. Luồng hoạt động (Happy path)
+1. [Bước 1]
+2. [Bước 2]
+3. [Phản hồi của hệ thống]
+4. [Kết quả/Ghi log].
 
 #### 2.3. User Stories
-*   **As a [Primary User Persona]:** I want [action] so that [benefit].
-*   **As a [Secondary User Persona]:** I want [action] so that [benefit].
+*   **As a [Primary User Persona]:** Tôi muốn [hành động] để [lợi ích].
+*   **As a [Secondary User Persona]:** Tôi muốn [hành động] để [lợi ích].
 
-#### 2.4. Technical Requirements
-*   **[Platform A (e.g., Android)]:** [Specific APIs, services, or permissions required].
-*   **[Platform B (e.g., iOS)]:** [Frameworks, limitations, or specific configurations].
-*   **[Backend/Cloud/Sync]:** [Database needs, synchronization methods, or infrastructure].
+#### 2.4. Yêu cầu kỹ thuật
+*   **[Platform A (vd: Android)]:** [Các API, dịch vụ, hoặc quyền truy cập cụ thể cần thiết].
+*   **[Platform B (vd: iOS)]:** [Framework, giới hạn, hoặc cấu hình cụ thể].
+*   **[Backend/Cloud/Sync]:** [Yêu cầu cơ sở dữ liệu, phương thức đồng bộ, hoặc hạ tầng].
 
 #### 2.5. Acceptance Criteria
-*   [ ] [Performance metric (e.g., latency < X ms)]
-*   [ ] [Accuracy or success rate (e.g., > 95%)]
-*   [ ] [User experience requirement]
-*   [ ] [Validation rules (e.g., input validation, data format)]
-*   [ ] [Resource usage constraint (e.g., < 3% battery)].
+*   [ ] [Performance metric (vd: độ trễ < X ms)]
+*   [ ] [Độ chính xác hoặc tỷ lệ thành công (vd: > 95%)]
+*   [ ] [Yêu cầu trải nghiệm người dùng]
+*   [ ] [Quy tắc xác thực (vd: xác thực đầu vào, định dạng dữ liệu)]
+*   [ ] [Giới hạn sử dụng tài nguyên (vd: < 3% pin)].
 
-#### 2.6. Edge Cases & Error Handling
-*   [Scenario 1 (e.g., Offline mode)]: [System response]
-*   [Scenario 2 (e.g., User attempt to bypass)]: [System response]
-*   [Scenario 3 (e.g., Database corruption)]: [Fallback mechanism].
+#### 2.6. Các trường hợp ngoại lệ & xử lý lỗi (Edge Cases & Error Handling)
+*   [Scenario 1 (vd: Chế độ ngoại tuyến)]: [Phản hồi của hệ thống]
+*   [Scenario 2 (vd: Người dùng cố gắng vượt qua quy định)]: [Phản hồi của hệ thống]
+*   [Scenario 3 (vd: Hỏng cơ sở dữ liệu)]: [Cơ chế dự phòng].
 
 ---
 
-## 3. NON-FUNCTIONAL REQUIREMENTS (OPTIONAL)
-### 3.1. Performance (OPTIONAL)
-*   **Battery/Resource Consumption:** [Maximum allowable usage].
-*   **Network/Memory Usage:** [Usage limits].
-*   **Latency:** [Response time targets].
-*   [other requirements ...]
+## 3. YÊU CẦU PHI CHỨC NĂNG (OPTIONAL)
+### 3.1. Performance
+*   **Tiêu hao pin/tài nguyên:** [Mức sử dụng tối đa cho phép].
+*   **Network/Memory:** [Giới hạn sử dụng].
+*   **Độ trễ:** [Mục tiêu thời gian phản hồi].
+*   [các yêu cầu khác ...]
 
 ### 3.2. Security (OPTIONAL)
-*   [Encryption standards, password hashing, session management, and API security].
+*   [Tiêu chuẩn mã hóa, băm mật khẩu, quản lý phiên, và bảo mật API].
 
-### 3.3. Scalability (OPTIONAL)
-*   [Concurrency support and database architecture (e.g., sharding)].
+### 3.3. Khả năng mở rộng (OPTIONAL)
+*   [Hỗ trợ đồng thời và kiến trúc cơ sở dữ liệu (vd: sharding)].
 
-### 3.4. Compatibility (OPTIONAL)
-| Platform | Minimum Version | Optimal Version | Notes |
+### 3.4. Khả năng tương thích (OPTIONAL)
+| Platform | Minimum Version | Optimal Version | Ghi chú |
 | :--- | :--- | :--- | :--- |
-| [OS Name] | [Version] | [Version] | [Compatibility notes] |
+| [Tên OS] | [Phiên bản] | [Phiên bản] | [Ghi chú tương thích] |
 
-### 3.5. Compliance (OPTIONAL)
-*   [Legal and regulatory standards (e.g., GDPR, COPPA, local laws)].
+### 3.5. Tuân thủ (OPTIONAL)
+*   [Tiêu chuẩn pháp lý và quy định (vd: GDPR, COPPA, luật địa phương)].
 
 ---
 
-## 4. RISKS & MITIGATIONS (OPTIONAL)
-### 4.1. Technical/UX/Business Risks
-| Risk | Severity | Mitigation Strategy |
+## 4. Rủi ro & Phương án xử lý (OPTIONAL)
+### 4.1. Rủi ro kỹ thuật/UX/Business
+| Rủi ro | Mức độ | Cách xử lý |
 | :--- | :--- | :--- |
-| [Description of risk] | [High/Medium/Low] | [How to prevent or handle it] |
+| [Mô tả rủi ro] | [High/Medium/Low] | [Cách phòng ngừa hoặc xử lý] |
 
 ---
 
-## 5. APPENDIX (OPTIONAL)
-### 5.1. Glossary
-*   **[Term]:** [Definition].
+## 5. PHỤ LỤC (OPTIONAL)
+### 5.1. Thuật ngữ
+*   **[Thuật ngữ]:** [Định nghĩa].
 
-### 5.2. Reference Documents
-*   [Links to API documentation or external resources].
+### 5.2. Tài liệu tham khảo
+*   [Liên kết đến tài liệu API hoặc tài nguyên bên ngoài].
 
-### 5.3. Open Questions
-*   [List of unresolved technical or design queries for the team].
+### 5.3. Câu hỏi mở
+*   [Danh sách các truy vấn thiết kế hoặc kỹ thuật chưa được giải quyết cho team].
 
 
 ---
