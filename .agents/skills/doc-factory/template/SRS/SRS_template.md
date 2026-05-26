@@ -86,20 +86,18 @@
 
 ## 9. Câu hỏi mở & Giả định (Optional)
 [Bất kỳ điểm không chắc chắn hoặc giả định nào còn lại]
+
+## 10. Phụ lục (Optional)
+[Chỉ viết khi có các thông tin bổ sung hoặc tham chiếu. Nếu không, viết `N/A`.]
+
 ```
 ---
 # Example Outputs
 
-### Ví dụ 1: Danh sách Use Case
-| Nhóm chức năng | ID Use Case | Tên Use Case | Actor | Điều kiện trước | Điều kiện sau |
-|-------------|-------------|---------------|---------------|----------------|-----------------|
-| Đăng nhập | UC-001 | Đăng ký User | User mới | User có email hợp lệ, Chưa đăng ký | Tài khoản được tạo, Email xác thực đã gửi |
-| Đăng nhập | UC-002 | Xác thực Email | User mới | UC-001 hoàn tất, Link xác thực hợp lệ | Tài khoản được kích hoạt, User có thể đăng nhập |
+## Ví dụ 1: Đặc tả chi tiết Use Case
+### [Đăng nhập]
 
-### Ví dụ 2: Đặc tả chi tiết Use Case
-#### [Đăng nhập]
-
-##### 1 Use Case UC-001: [Đăng ký User]
+#### 1 Use Case UC-001: [Đăng ký User]
 | Tiêu đề | Mô tả |
 | --- | -------------- |
 | ID Use Case | UC-001 |
@@ -154,7 +152,7 @@
 
 ---
 
-### Ví dụ 3: Yêu cầu Phi chức năng (Non-functional Requirements)
+## Ví dụ 2: Yêu cầu Phi chức năng (Non-functional Requirements)
 
 | ID | Loại | Mô tả |
 | :--- | :--- | :--- |
@@ -162,3 +160,22 @@
 | NFR-02 | Hiệu năng | Thời gian phản hồi API đăng ký không quá 3 giây |
 | NFR-03 | Tính khả dụng | Hệ thống hỗ trợ tốt nhất trên Samsung Galaxy S24 và các dòng Android mới |
 | NFR-04 | Tin cậy | Tỷ lệ gửi email thành công (Service level) đạt 99.9% |
+
+---
+
+## Ví dụ 3: Phụ lục
+Ví dụ trường hợp có nội dung tham chiếu, thì cần viết phụ lục:
+
+#### 2. Luồng chính (Happy Path)
+| Bước | Actor | Hành động / Phản hồi của Hệ thống | BR liên quan(nếu có) | 
+| :--- | :--- | :--- | :--- |
+| 1 | Hệ thống | Gửi push notification. Nội dung noti tương ứng với từng trường hợp được định nghĩa ở Phụ lục PL-01|  |
+
+
+#### 10. Phụ lục:
+**PL-01**
+| ID | Trường hợp | Nội dung noti |
+| :--- | :--- | :--- |
+| 1 | Với user chưa đăng nhập | Title: "ABC". Body: "XYZ" |
+| 2 | Với user đã đăng nhập | Title: "DEF". Body: "HIK" |
+
