@@ -1,9 +1,7 @@
 # FoodOrder — Đặc tả màn hình
 
 **Platform**: Mobile App
-**Ngày**: 2026-05-26
 **Tổng**: 8 màn hình, 1 modal, 2 dialog, 2 toast
-**User roles**: Khách hàng
 
 ---
 

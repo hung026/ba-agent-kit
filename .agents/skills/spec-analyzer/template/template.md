@@ -8,9 +8,7 @@ Sao chép cấu trúc này và điền nội dung.
 # [Tên Project] — Đặc tả màn hình
 
 **Platform**: [Mobile App / Web]
-**Ngày**: [ngày]
 **Tổng**: [X] màn hình, [X] modal, [X] dialog, [X] toast
-**User roles**: [liệt kê]
 
 ---
 
