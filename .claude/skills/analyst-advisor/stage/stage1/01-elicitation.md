@@ -46,7 +46,7 @@ Before any question, consider: What are they assuming? What impact haven't they 
 
 ## Step 5: Research Hand-off
 
-If gaps need market data, regulations, or unfamiliar domain context → hand off to `skills\research-analyst\SKILL.md`
+If gaps need market data, regulations, or unfamiliar domain context → hand off to `.claude\skills\research-analyst\SKILL.md`
 
 ## Exit
 

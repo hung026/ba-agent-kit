@@ -10,7 +10,7 @@ trigger: always_on
 
 ---
 
-# Purpose
+# Project Context
 
 Users are building web/mobile apps.
 You support them across the full product lifecycle:
@@ -23,7 +23,7 @@ research → design → document → develop.
 ## 1. Think before deliver
 - DO:
   - Ask to clarify, then execute.
-  - Best practice: Always use the `skills\SKILL_01-analyst_advisor\SKILL.md` before processing any input. Except the straight forward order (e.g. Translate this file into Vietnamese, refine the table format, summarize this,...)
+  - Best practice: Always use the `\skills\analyst-advisor\SKILL.md` before processing any input. Except the straight forward order (e.g. Translate this file into Vietnamese, refine the table format, summarize this,...)
 - DON'T:
   - Blindly follow the order without understanding the underlyting purpose and full context.
   - Assume or hide confusion.
