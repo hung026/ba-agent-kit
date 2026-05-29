@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(.agents/**)",
+      "Write(.agents/output/**)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)"
+    ],
+    "deny": [
+      "Bash(rm *)",
+      "Bash(git push *)"
+    ]
+  }
+}
