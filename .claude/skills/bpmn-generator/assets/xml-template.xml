@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BPMN 2.0 Template — Điền vào [placeholder] theo từng quy trình cụ thể.
+  Xóa comment này và các placeholder không dùng trước khi output.
+-->
+<definitions
+  xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  targetNamespace="http://example.com/bpmn"
+  id="Definitions_1">
+
+  <!-- ============================================================
+       PHẦN 1: COLLABORATION (chỉ dùng khi có >= 2 pools)
+       Nếu chỉ có 1 pool: xóa block này, dùng thẳng <process> đơn
+       ============================================================ -->
+  <collaboration id="Collab_1">
+    <participant id="Pool_A" name="[Tên Pool A]" processRef="Proc_A"/>
+    <participant id="Pool_B" name="[Tên Pool B]" processRef="Proc_B"/>
+    <!-- Thêm participant cho mỗi pool bổ sung -->
+
+    <!-- Message flows: giao tiếp giữa các pools -->
+    <messageFlow id="MF_1" name="[Tên tin nhắn]" sourceRef="[source_id]" targetRef="[target_id]"/>
+    <!-- Thêm messageFlow nếu có nhiều luồng tin -->
+  </collaboration>
+
+  <!-- ============================================================
+       PHẦN 2: PROCESSES — 1 <process> cho mỗi pool
+       ============================================================ -->
+
+  <!-- Process của Pool A -->
+  <process id="Proc_A" isExecutable="false">
+
+    <!-- START EVENT -->
+    <startEvent id="Start_A" name="[Tên]">
+      <outgoing>SF_A1</outgoing>
+      <!-- Thêm <messageEventDefinition/> nếu được trigger bởi tin nhắn -->
+    </startEvent>
+
+    <!-- TASKS -->
+    <task id="Task_A1" name="[Tên task 1]">
+      <incoming>SF_A1</incoming>
+      <outgoing>SF_A2</outgoing>
+    </task>
+
+    <task id="Task_A2" name="[Tên task 2]">
+      <incoming>SF_A2</incoming>
+      <outgoing>SF_A3</outgoing>
+    </task>
+
+    <!-- GATEWAY (nếu cần) -->
+    <exclusiveGateway id="GW_A1" name="[Điều kiện?]">
+      <incoming>SF_A3</incoming>
+      <outgoing>SF_A4</outgoing>
+      <outgoing>SF_A5</outgoing>
+    </exclusiveGateway>
+
+    <!-- INTERMEDIATE CATCH EVENT (nếu chờ tin từ pool khác) -->
+    <intermediateCatchEvent id="ICE_A1" name="[Tên]">
+      <incoming>SF_A_x</incoming>
+      <outgoing>SF_A_y</outgoing>
+      <messageEventDefinition id="MED_A1"/>
+    </intermediateCatchEvent>
+
+    <!-- END EVENT -->
+    <endEvent id="End_A" name="[Tên]">
+      <incoming>SF_A_last</incoming>
+    </endEvent>
+
+    <!-- SEQUENCE FLOWS của Pool A -->
+    <sequenceFlow id="SF_A1" sourceRef="Start_A" targetRef="Task_A1"/>
+    <sequenceFlow id="SF_A2" sourceRef="Task_A1" targetRef="Task_A2"/>
+    <sequenceFlow id="SF_A3" sourceRef="Task_A2" targetRef="GW_A1"/>
+    <sequenceFlow id="SF_A4" name="[Có]" sourceRef="GW_A1" targetRef="[target]"/>
+    <sequenceFlow id="SF_A5" name="[Không]" sourceRef="GW_A1" targetRef="[target]"/>
+  </process>
+
+  <!-- Process của Pool B -->
+  <process id="Proc_B" isExecutable="false">
+    <startEvent id="Start_B" name="[Tên]">
+      <outgoing>SF_B1</outgoing>
+      <messageEventDefinition id="MED_B1"/>
+    </startEvent>
+
+    <task id="Task_B1" name="[Tên task]">
+      <incoming>SF_B1</incoming>
+      <outgoing>SF_B2</outgoing>
+    </task>
+
+    <endEvent id="End_B" name="[Tên]">
+      <incoming>SF_B2</incoming>
+    </endEvent>
+
+    <sequenceFlow id="SF_B1" sourceRef="Start_B" targetRef="Task_B1"/>
+    <sequenceFlow id="SF_B2" sourceRef="Task_B1" targetRef="End_B"/>
+  </process>
+
+  <!-- ============================================================
+       PHẦN 3: DIAGRAM LAYOUT (DI)
+       Tính tọa độ theo references/layout-algorithm.md
+       ============================================================ -->
+  <bpmndi:BPMNDiagram id="Diagram_1">
+    <bpmndi:BPMNPlane id="Plane_1" bpmnElement="Collab_1">
+      <!-- Nếu chỉ 1 pool: bpmnElement="Proc_A" -->
+
+      <!-- === POOL SHAPES === -->
+      <bpmndi:BPMNShape id="S_Pool_A" bpmnElement="Pool_A" isHorizontal="true">
+        <dc:Bounds x="150" y="80" width="[POOL_WIDTH]" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_Pool_B" bpmnElement="Pool_B" isHorizontal="true">
+        <dc:Bounds x="150" y="280" width="[POOL_WIDTH]" height="160"/>
+      </bpmndi:BPMNShape>
+
+      <!-- === ELEMENT SHAPES (Pool A) === -->
+      <bpmndi:BPMNShape id="S_Start_A" bpmnElement="Start_A">
+        <dc:Bounds x="[x]" y="[y]" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="[lx]" y="[ly]" width="70" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_A1" bpmnElement="Task_A1">
+        <dc:Bounds x="[x]" y="[y]" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_GW_A1" bpmnElement="GW_A1" isMarkerVisible="true">
+        <dc:Bounds x="[x]" y="[y]" width="50" height="50"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="[lx]" y="[ly]" width="80" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_ICE_A1" bpmnElement="ICE_A1">
+        <dc:Bounds x="[x]" y="[y]" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="[lx]" y="[ly]" width="80" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_End_A" bpmnElement="End_A">
+        <dc:Bounds x="[x]" y="[y]" width="36" height="36"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="[lx]" y="[ly]" width="60" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <!-- === ELEMENT SHAPES (Pool B) === -->
+      <bpmndi:BPMNShape id="S_Start_B" bpmnElement="Start_B">
+        <dc:Bounds x="[x]" y="[y]" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_Task_B1" bpmnElement="Task_B1">
+        <dc:Bounds x="[x]" y="[y]" width="120" height="80"/>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="S_End_B" bpmnElement="End_B">
+        <dc:Bounds x="[x]" y="[y]" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+
+      <!-- === SEQUENCE FLOW EDGES (Pool A) === -->
+      <bpmndi:BPMNEdge id="E_SF_A1" bpmnElement="SF_A1">
+        <di:waypoint x="[x1]" y="[y1]"/>
+        <di:waypoint x="[x2]" y="[y2]"/>
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="E_SF_A2" bpmnElement="SF_A2">
+        <di:waypoint x="[x1]" y="[y1]"/>
+        <di:waypoint x="[x2]" y="[y2]"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- Sequence flow có label (từ gateway) -->
+      <bpmndi:BPMNEdge id="E_SF_A4" bpmnElement="SF_A4">
+        <di:waypoint x="[x1]" y="[y1]"/>
+        <di:waypoint x="[x2]" y="[y2]"/>
+        <bpmndi:BPMNLabel><dc:Bounds x="[lx]" y="[ly]" width="30" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- === SEQUENCE FLOW EDGES (Pool B) === -->
+      <bpmndi:BPMNEdge id="E_SF_B1" bpmnElement="SF_B1">
+        <di:waypoint x="[x1]" y="[y1]"/>
+        <di:waypoint x="[x2]" y="[y2]"/>
+      </bpmndi:BPMNEdge>
+
+      <!-- === MESSAGE FLOW EDGES (giữa pools) === -->
+      <bpmndi:BPMNEdge id="E_MF_1" bpmnElement="MF_1">
+        <di:waypoint x="[x1]" y="[y1]"/>  <!-- bottom của source (pool trên) -->
+        <di:waypoint x="[x2]" y="[y2]"/>  <!-- top của target (pool dưới) -->
+        <bpmndi:BPMNLabel><dc:Bounds x="[lx]" y="[ly]" width="60" height="14"/></bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

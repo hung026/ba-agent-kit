@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="definitions_1"
+             targetNamespace="http://bpmn.io/schema/bpmn"
+             exporter="bpmn-generator-skill"
+             exporterVersion="1.0">
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: COLLABORATION                                      -->
+  <!-- ============================================================ -->
+  <collaboration id="collaboration_1">
+
+    <participant id="participant_user" name="Nguoi dung" processRef="process_user" />
+    <participant id="participant_system" name="He thong" processRef="process_system" />
+
+    <messageFlow id="mf_user_send_to_sys" name="Gui tin nhan" sourceRef="task_user_send" targetRef="task_sys_show_ui" />
+
+  </collaboration>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: PROCESSES                                          -->
+  <!-- ============================================================ -->
+
+  <!-- === PROCESS: Nguoi dung === -->
+  <process id="process_user" isExecutable="false">
+
+    <startEvent id="start_user" name="Start">
+      <outgoing>sf_start_user_to_send</outgoing>
+    </startEvent>
+
+    <userTask id="task_user_send" name="Dinh kem anh + nhan Gui">
+      <incoming>sf_start_user_to_send</incoming>
+      <outgoing>sf_send_to_receive</outgoing>
+    </userTask>
+
+    <userTask id="task_user_receive" name="Nhan noi dung revert">
+      <incoming>sf_send_to_receive</incoming>
+      <outgoing>sf_receive_to_gw_retry</outgoing>
+    </userTask>
+
+    <exclusiveGateway id="gw_user_retry" name="Gui lai?">
+      <incoming>sf_receive_to_gw_retry</incoming>
+      <outgoing>sf_gw_retry_to_resend</outgoing>
+      <outgoing>sf_gw_retry_to_cancel</outgoing>
+    </exclusiveGateway>
+
+    <userTask id="task_user_resend" name="Chinh sua + Gui lai">
+      <incoming>sf_gw_retry_to_resend</incoming>
+      <outgoing>sf_resend_to_merge</outgoing>
+    </userTask>
+
+    <userTask id="task_user_cancel" name="Huy gui">
+      <incoming>sf_gw_retry_to_cancel</incoming>
+      <outgoing>sf_cancel_to_merge</outgoing>
+    </userTask>
+
+    <exclusiveGateway id="gw_user_merge" name="">
+      <incoming>sf_resend_to_merge</incoming>
+      <incoming>sf_cancel_to_merge</incoming>
+      <outgoing>sf_merge_to_end_user</outgoing>
+    </exclusiveGateway>
+
+    <endEvent id="end_user" name="End">
+      <incoming>sf_merge_to_end_user</incoming>
+    </endEvent>
+
+    <sequenceFlow id="sf_start_user_to_send" sourceRef="start_user" targetRef="task_user_send" />
+    <sequenceFlow id="sf_send_to_receive" sourceRef="task_user_send" targetRef="task_user_receive" />
+    <sequenceFlow id="sf_receive_to_gw_retry" sourceRef="task_user_receive" targetRef="gw_user_retry" />
+    <sequenceFlow id="sf_gw_retry_to_resend" name="Yes" sourceRef="gw_user_retry" targetRef="task_user_resend" />
+    <sequenceFlow id="sf_gw_retry_to_cancel" name="No" sourceRef="gw_user_retry" targetRef="task_user_cancel" />
+    <sequenceFlow id="sf_resend_to_merge" sourceRef="task_user_resend" targetRef="gw_user_merge" />
+    <sequenceFlow id="sf_cancel_to_merge" sourceRef="task_user_cancel" targetRef="gw_user_merge" />
+    <sequenceFlow id="sf_merge_to_end_user" sourceRef="gw_user_merge" targetRef="end_user" />
+
+  </process>
+
+  <!-- === PROCESS: He thong === -->
+  <process id="process_system" isExecutable="false">
+
+    <startEvent id="start_sys" name="Start">
+      <outgoing>sf_start_sys_to_ui</outgoing>
+    </startEvent>
+
+    <serviceTask id="task_sys_show_ui" name="Hien thi optimistic UI + disable chat">
+      <incoming>sf_start_sys_to_ui</incoming>
+      <outgoing>sf_ui_to_upload</outgoing>
+    </serviceTask>
+
+    <serviceTask id="task_sys_upload" name="Upload anh len Dify">
+      <incoming>sf_ui_to_upload</incoming>
+      <outgoing>sf_upload_to_gw_upload</outgoing>
+    </serviceTask>
+
+    <exclusiveGateway id="gw_sys_upload" name="Upload thanh cong?">
+      <incoming>sf_upload_to_gw_upload</incoming>
+      <outgoing>sf_gw_upload_to_api</outgoing>
+      <outgoing>sf_gw_upload_to_revert_local</outgoing>
+    </exclusiveGateway>
+
+    <serviceTask id="task_sys_api" name="Goi API gui tin nhan kem file_id">
+      <incoming>sf_gw_upload_to_api</incoming>
+      <outgoing>sf_api_to_gw_api</outgoing>
+    </serviceTask>
+
+    <exclusiveGateway id="gw_sys_api" name="API thanh cong?">
+      <incoming>sf_api_to_gw_api</incoming>
+      <outgoing>sf_gw_api_to_success</outgoing>
+      <outgoing>sf_gw_api_to_revert_fid</outgoing>
+    </exclusiveGateway>
+
+    <endEvent id="end_sys_success" name="Thanh cong">
+      <incoming>sf_gw_api_to_success</incoming>
+    </endEvent>
+
+    <serviceTask id="task_sys_revert_fid" name="Xoa UI + Revert giu file_id + Toast">
+      <incoming>sf_gw_api_to_revert_fid</incoming>
+      <outgoing>sf_revert_fid_to_end</outgoing>
+    </serviceTask>
+
+    <endEvent id="end_sys_error_api" name="Cho retry (co file_id)">
+      <incoming>sf_revert_fid_to_end</incoming>
+    </endEvent>
+
+    <serviceTask id="task_sys_revert_local" name="Xoa UI + Revert anh local + Toast">
+      <incoming>sf_gw_upload_to_revert_local</incoming>
+      <outgoing>sf_revert_local_to_end</outgoing>
+    </serviceTask>
+
+    <endEvent id="end_sys_error_upload" name="Cho retry (khong file_id)">
+      <incoming>sf_revert_local_to_end</incoming>
+    </endEvent>
+
+    <sequenceFlow id="sf_start_sys_to_ui" sourceRef="start_sys" targetRef="task_sys_show_ui" />
+    <sequenceFlow id="sf_ui_to_upload" sourceRef="task_sys_show_ui" targetRef="task_sys_upload" />
+    <sequenceFlow id="sf_upload_to_gw_upload" sourceRef="task_sys_upload" targetRef="gw_sys_upload" />
+    <sequenceFlow id="sf_gw_upload_to_api" name="Yes" sourceRef="gw_sys_upload" targetRef="task_sys_api" />
+    <sequenceFlow id="sf_gw_upload_to_revert_local" name="No" sourceRef="gw_sys_upload" targetRef="task_sys_revert_local" />
+    <sequenceFlow id="sf_api_to_gw_api" sourceRef="task_sys_api" targetRef="gw_sys_api" />
+    <sequenceFlow id="sf_gw_api_to_success" name="Yes" sourceRef="gw_sys_api" targetRef="end_sys_success" />
+    <sequenceFlow id="sf_gw_api_to_revert_fid" name="No" sourceRef="gw_sys_api" targetRef="task_sys_revert_fid" />
+    <sequenceFlow id="sf_revert_fid_to_end" sourceRef="task_sys_revert_fid" targetRef="end_sys_error_api" />
+    <sequenceFlow id="sf_revert_local_to_end" sourceRef="task_sys_revert_local" targetRef="end_sys_error_upload" />
+
+  </process>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: DIAGRAM INTERCHANGE (DI)                           -->
+  <!-- Pool 0 (User):   pool_y=160, center_y=300, no_branch=390     -->
+  <!-- Pool 1 (System): pool_y=480, center_y=620, no_branch=710     -->
+  <!-- All pools width=1550, height=280                              -->
+  <!-- ============================================================ -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="collaboration_1">
+
+      <!-- === POOL SHAPES === -->
+      <bpmndi:BPMNShape id="shape_participant_user" bpmnElement="participant_user" isHorizontal="true">
+        <dc:Bounds x="160" y="160" width="1550" height="280" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_participant_system" bpmnElement="participant_system" isHorizontal="true">
+        <dc:Bounds x="160" y="480" width="1550" height="280" />
+      </bpmndi:BPMNShape>
+
+      <!-- === POOL 0: Nguoi dung — ELEMENT SHAPES === -->
+      <!-- center_y=300, no_branch_center=390 -->
+
+      <bpmndi:BPMNShape id="shape_start_user" bpmnElement="start_user">
+        <dc:Bounds x="250" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_task_user_send" bpmnElement="task_user_send">
+        <dc:Bounds x="420" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_task_user_receive" bpmnElement="task_user_receive">
+        <dc:Bounds x="590" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_gw_user_retry" bpmnElement="gw_user_retry" isMarkerVisible="true">
+        <dc:Bounds x="760" y="275" width="50" height="50" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_task_user_resend" bpmnElement="task_user_resend">
+        <dc:Bounds x="930" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_task_user_cancel" bpmnElement="task_user_cancel">
+        <dc:Bounds x="930" y="350" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_gw_user_merge" bpmnElement="gw_user_merge" isMarkerVisible="true">
+        <dc:Bounds x="1100" y="275" width="50" height="50" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_end_user" bpmnElement="end_user">
+        <dc:Bounds x="1270" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <!-- === POOL 0: Nguoi dung — SEQUENCE FLOW EDGES === -->
+
+      <!-- start_user -> task_user_send -->
+      <bpmndi:BPMNEdge id="edge_sf_start_user_to_send" bpmnElement="sf_start_user_to_send">
+        <di:waypoint x="286" y="300" />
+        <di:waypoint x="420" y="300" />
+      </bpmndi:BPMNEdge>
+
+      <!-- task_user_send -> task_user_receive -->
+      <bpmndi:BPMNEdge id="edge_sf_send_to_receive" bpmnElement="sf_send_to_receive">
+        <di:waypoint x="520" y="300" />
+        <di:waypoint x="590" y="300" />
+      </bpmndi:BPMNEdge>
+
+      <!-- task_user_receive -> gw_user_retry -->
+      <bpmndi:BPMNEdge id="edge_sf_receive_to_gw_retry" bpmnElement="sf_receive_to_gw_retry">
+        <di:waypoint x="690" y="300" />
+        <di:waypoint x="760" y="300" />
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_user_retry -> task_user_resend (Yes, straight) -->
+      <bpmndi:BPMNEdge id="edge_sf_gw_retry_to_resend" bpmnElement="sf_gw_retry_to_resend">
+        <di:waypoint x="810" y="300" />
+        <di:waypoint x="930" y="300" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="855" y="282" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_user_retry -> task_user_cancel (No, down then right) -->
+      <bpmndi:BPMNEdge id="edge_sf_gw_retry_to_cancel" bpmnElement="sf_gw_retry_to_cancel">
+        <di:waypoint x="785" y="325" />
+        <di:waypoint x="785" y="390" />
+        <di:waypoint x="930" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="790" y="350" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- task_user_resend -> gw_user_merge -->
+      <bpmndi:BPMNEdge id="edge_sf_resend_to_merge" bpmnElement="sf_resend_to_merge">
+        <di:waypoint x="1030" y="300" />
+        <di:waypoint x="1100" y="300" />
+      </bpmndi:BPMNEdge>
+
+      <!-- task_user_cancel -> gw_user_merge (up from no branch) -->
+      <bpmndi:BPMNEdge id="edge_sf_cancel_to_merge" bpmnElement="sf_cancel_to_merge">
+        <di:waypoint x="1030" y="390" />
+        <di:waypoint x="1125" y="390" />
+        <di:waypoint x="1125" y="325" />
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_user_merge -> end_user -->
+      <bpmndi:BPMNEdge id="edge_sf_merge_to_end_user" bpmnElement="sf_merge_to_end_user">
+        <di:waypoint x="1150" y="300" />
+        <di:waypoint x="1270" y="300" />
+      </bpmndi:BPMNEdge>
+
+      <!-- === POOL 1: He thong — ELEMENT SHAPES === -->
+      <!-- center_y=620, no_branch_center=710 -->
+
+      <bpmndi:BPMNShape id="shape_start_sys" bpmnElement="start_sys">
+        <dc:Bounds x="250" y="602" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_task_sys_show_ui" bpmnElement="task_sys_show_ui">
+        <dc:Bounds x="420" y="580" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_task_sys_upload" bpmnElement="task_sys_upload">
+        <dc:Bounds x="590" y="580" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_gw_sys_upload" bpmnElement="gw_sys_upload" isMarkerVisible="true">
+        <dc:Bounds x="760" y="595" width="50" height="50" />
+      </bpmndi:BPMNShape>
+
+      <!-- Yes branch of upload gateway -->
+      <bpmndi:BPMNShape id="shape_task_sys_api" bpmnElement="task_sys_api">
+        <dc:Bounds x="930" y="580" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_gw_sys_api" bpmnElement="gw_sys_api" isMarkerVisible="true">
+        <dc:Bounds x="1100" y="595" width="50" height="50" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_end_sys_success" bpmnElement="end_sys_success">
+        <dc:Bounds x="1270" y="602" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <!-- No branch of API gateway (nested) -->
+      <bpmndi:BPMNShape id="shape_task_sys_revert_fid" bpmnElement="task_sys_revert_fid">
+        <dc:Bounds x="1270" y="670" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_end_sys_error_api" bpmnElement="end_sys_error_api">
+        <dc:Bounds x="1440" y="692" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <!-- No branch of upload gateway -->
+      <bpmndi:BPMNShape id="shape_task_sys_revert_local" bpmnElement="task_sys_revert_local">
+        <dc:Bounds x="930" y="670" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="shape_end_sys_error_upload" bpmnElement="end_sys_error_upload">
+        <dc:Bounds x="1100" y="692" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <!-- === POOL 1: He thong — SEQUENCE FLOW EDGES === -->
+
+      <!-- start_sys -> task_sys_show_ui -->
+      <bpmndi:BPMNEdge id="edge_sf_start_sys_to_ui" bpmnElement="sf_start_sys_to_ui">
+        <di:waypoint x="286" y="620" />
+        <di:waypoint x="420" y="620" />
+      </bpmndi:BPMNEdge>
+
+      <!-- task_sys_show_ui -> task_sys_upload -->
+      <bpmndi:BPMNEdge id="edge_sf_ui_to_upload" bpmnElement="sf_ui_to_upload">
+        <di:waypoint x="520" y="620" />
+        <di:waypoint x="590" y="620" />
+      </bpmndi:BPMNEdge>
+
+      <!-- task_sys_upload -> gw_sys_upload -->
+      <bpmndi:BPMNEdge id="edge_sf_upload_to_gw_upload" bpmnElement="sf_upload_to_gw_upload">
+        <di:waypoint x="690" y="620" />
+        <di:waypoint x="760" y="620" />
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_sys_upload -> task_sys_api (Yes, straight) -->
+      <bpmndi:BPMNEdge id="edge_sf_gw_upload_to_api" bpmnElement="sf_gw_upload_to_api">
+        <di:waypoint x="810" y="620" />
+        <di:waypoint x="930" y="620" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="855" y="602" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_sys_upload -> task_sys_revert_local (No, down then right) -->
+      <bpmndi:BPMNEdge id="edge_sf_gw_upload_to_revert_local" bpmnElement="sf_gw_upload_to_revert_local">
+        <di:waypoint x="785" y="645" />
+        <di:waypoint x="785" y="710" />
+        <di:waypoint x="930" y="710" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="790" y="670" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- task_sys_api -> gw_sys_api -->
+      <bpmndi:BPMNEdge id="edge_sf_api_to_gw_api" bpmnElement="sf_api_to_gw_api">
+        <di:waypoint x="1030" y="620" />
+        <di:waypoint x="1100" y="620" />
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_sys_api -> end_sys_success (Yes, straight) -->
+      <bpmndi:BPMNEdge id="edge_sf_gw_api_to_success" bpmnElement="sf_gw_api_to_success">
+        <di:waypoint x="1150" y="620" />
+        <di:waypoint x="1270" y="620" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1195" y="602" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- gw_sys_api -> task_sys_revert_fid (No, down then right) -->
+      <bpmndi:BPMNEdge id="edge_sf_gw_api_to_revert_fid" bpmnElement="sf_gw_api_to_revert_fid">
+        <di:waypoint x="1125" y="645" />
+        <di:waypoint x="1125" y="710" />
+        <di:waypoint x="1270" y="710" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1130" y="670" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+
+      <!-- task_sys_revert_local -> end_sys_error_upload -->
+      <bpmndi:BPMNEdge id="edge_sf_revert_local_to_end" bpmnElement="sf_revert_local_to_end">
+        <di:waypoint x="1030" y="710" />
+        <di:waypoint x="1100" y="710" />
+      </bpmndi:BPMNEdge>
+
+      <!-- task_sys_revert_fid -> end_sys_error_api -->
+      <bpmndi:BPMNEdge id="edge_sf_revert_fid_to_end" bpmnElement="sf_revert_fid_to_end">
+        <di:waypoint x="1370" y="710" />
+        <di:waypoint x="1440" y="710" />
+      </bpmndi:BPMNEdge>
+
+      <!-- === MESSAGE FLOW EDGE === -->
+      <bpmndi:BPMNEdge id="edge_mf_user_send_to_sys" bpmnElement="mf_user_send_to_sys">
+        <di:waypoint x="470" y="340" />
+        <di:waypoint x="470" y="580" />
+      </bpmndi:BPMNEdge>
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
