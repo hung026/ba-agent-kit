@@ -12,17 +12,8 @@ description: >
 
 Đọc tài liệu đặc tả → Xuất mô tả màn hình cho designer vẽ UI.
 
-Chỉ quan tâm đến **giao diện**: cái gì hiển thị, ở đâu, trông như thế nào, chuyển đi đâu.
-Không quan tâm: API, database, logic backend, xử lý lỗi kỹ thuật.
-
----
-
-## Đọc input
-
-- `.docx` → `extract-text <file>`
-- `.md`, `.txt` → `cat <file>`
-
-- Paste text → dùng trực tiếp
+Chỉ quan tâm đến **giao diện**: cái gì hiển thị, ở đâu, trông như thế nào, flow hoạt động ra sao .
+Không quan tâm: API, database, logic backend, yêu cầu kỹ thuật
 
 ---
 
@@ -51,6 +42,8 @@ Trích xuất tất cả "view" mà user nhìn thấy:
 **Đánh số:** `{Prefix}{module 2 chữ số}{màn 2 chữ số}` — vd: `S-0101`, `M-0201`
 
 **Suy luận thêm:** SRS thường không liệt kê hết. Nếu SRS nói "quản lý sản phẩm" → suy luận cần có: danh sách, chi tiết, tạo/sửa, xác nhận xóa. Đánh dấu `[suy luận]` để user verify.
+
+**Tổng hợp màn hình:** Nếu các tính năng có thể được hiển thị trên cùng một màn hình → gom vào 1 màn hình.
 
 ### Bước 3: Mô tả từng màn hình
 
