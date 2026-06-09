@@ -1,13 +1,9 @@
 1. Còn thiếu
 - SRS
-  - Thêm temp mixpanel
-  - BR phải đánh 1-2-3 theo UC, không tăng dần
   - CoVe: Cùng lỗi thì phải cùng error message xuyên suốt
   - Ví dụ về SRS tốt:
     - Khi chuyển conversation vẫn lưu text đã nhập
     - Handle edge case: Mở converA -> Mở panel xóa converA -> thì phải tự quay về màn new chat
-  - Ví dụ về mô tả design tốt:
-    - nút like: unselect nút còn lại, hoặc unlike thì hiện thế nào
   - Thêm changelog ở đầu tài liệu
 
 2. SKILL mới:

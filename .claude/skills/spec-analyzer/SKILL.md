@@ -97,3 +97,4 @@ Output: file `.md` lưu tại `\output\spec\[tên-project]-screen-spec.md`
 - **Nội dung mẫu phải thật**: Designer cần biết text dài bao nhiêu, số có mấy chữ số, tên dài hay ngắn — để bố trí layout.
 - **Không bỏ sót view ẩn**: Modal, dialog, toast, empty state — đều là thứ designer phải vẽ.
 - **Mobile-first**: Mặc định mô tả theo mobile. Nếu web → ghi rõ.
+- **Gom giao diện**: Nếu các tính năng có thể được hiển thị trên cùng một màn hình → gom vào 1 màn hình.

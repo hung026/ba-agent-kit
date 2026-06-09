@@ -22,23 +22,25 @@
 ### 3.1 [Tên Feature/Epic]
 
 #### US-001: [Tiêu đề Story]
+1. **US statement**
 **As a** [loại người dùng/persona]  
 **I want** [chức năng]  
 **So that** [giá trị kinh doanh/kết quả]
 
-**Dependencies**: US-002, US-005 (nếu có)
+2. **Dependencies**
+US-002, US-005 (nếu có)
 
-**Acceptance Criteria**:
+3. **Acceptance Criteria**:
 - AC1: GIVEN [điều kiện] WHEN [hành động] THEN [kết quả mong đợi]
 - AC2: GIVEN [điều kiện] WHEN [hành động] THEN [kết quả mong đợi — trường hợp lỗi/tiêu cực]
 
-**Exception & Edge Cases**:
+4. **Exception & Edge Cases**:
 
 | Scenario | Cách xử lý | Cơ chế Fallback |
 | :--- | :--- | :--- |
 | [tên exception] | [cách xử lý exception] | [nếu xử lý exception vẫn lỗi thì làm gì] |
 
-**Technical Context & NFR** (nếu cần):
+5. **Technical Context & NFR** (nếu cần):
 [Bất kỳ chi tiết kỹ thuật/business rules nào giúp developer hiểu cách triển khai, hoặc yêu cầu phi chức năng (NFR)]
 
 **
@@ -62,14 +64,14 @@
 ### Ví dụ 2: Chi tiết User Story
 
 #### User Story US-001: Đăng ký người dùng
-
+1. **US statement**
 **As a** khách truy cập mới  
 **I want** tạo tài khoản bằng email của mình  
 **So that** tôi có thể truy cập các tính năng cá nhân hóa và lưu dữ liệu
 
-**Dependencies**: Không có
+2. **Dependencies**: Không có
 
-**Acceptance Criteria**:
+3. **Acceptance Criteria**:
 ```
 AC1: Đăng ký thành công
 Given tôi đang ở trang đăng ký
@@ -92,7 +94,7 @@ Then tôi thấy lỗi "Email này đã được đăng ký. Thử đăng nhập
 And tôi thấy một liên kết đến trang login
 ```
 
-**Exception & Edge Cases**:
+4. **Exception & Edge Cases**:
 
 | Scenario | Cách xử lý | Cơ chế Fallback |
 | :--- | :--- | :--- |
@@ -104,7 +106,7 @@ And tôi thấy một liên kết đến trang login
 | Network timeout | Hiện toast Mất kết nối, thử lại 3 lần | Cache dữ liệu cục bộ, cho phép chế độ offline |
 | Định dạng email không hợp lệ | Hiện lỗi nội dòng Vui lòng nhập email hợp lệ | Bôi đỏ trường nhập, vô hiệu hóa submit |
 
-**Technical Context & NFR**:
+5. **Technical Context & NFR**:
 - Mật khẩu phải được hashed bằng bcrypt (tối thiểu 10 salt rounds)
 - Token xác thực email hết hạn sau 24 giờ
 - Rate limit: 5 lần thử đăng ký mỗi IP mỗi giờ

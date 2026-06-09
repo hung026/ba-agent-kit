@@ -18,11 +18,11 @@
 |-------------|-------------|---------------|---------------|----------------|-----------------|
 | ... | UC-001 | ... | ... | ... | ... |
 
-## 4. Đặc tả chi tiết Use Case
+## 3. Đặc tả chi tiết Use Case
 
-### 4.1 [Tên chức năng]
+### 3.1 [Tên chức năng]
 
-#### 1 Use Case UC-001: [Tên UC]
+#### 1. UC-001: [Tên UC]
 
 | Tiêu đề | Mô tả |
 | ------------------------ | -------- |
@@ -35,7 +35,7 @@
 | Điều kiện sau – Thành công | |
 | Điều kiện sau – Thất bại | |
 
-#### 2 Luồng chính (Happy Path)
+#### 2. Luồng chính (Happy Path)
 
 | Bước | Actor | Hành động / Phản hồi của Hệ thống | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- |
@@ -44,21 +44,21 @@
 | 3 | User | | BR |
 | 4 | Hệ thống | | BR |
 
-#### 3 Luồng thay thế (Alternative Flow)
+#### 3. Luồng thay thế (Alternative Flow)
 
 | ID Luồng | Bước | Mô tả | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- |
 | AF-01 | Bước | | BR |
 | AF-02 | Bước | | BR |
 
-#### 4 Quy tắc Nghiệp vụ (Business Rules)
+#### 4. Quy tắc Nghiệp vụ (Business Rules)
 
 | Business Rules | Mô tả |
 | :--- | :--- |
 | BR-01 | |
 | BR-02 | |
 
-#### 5 Luồng Ngoại lệ / Lỗi (Exception / Error Flow)
+#### 5. Luồng Ngoại lệ / Lỗi (Exception / Error Flow)
 
 | ID Luồng | Bước | Lỗi | Xử lý | Cơ chế fallback | BR liên quan(nếu có) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -67,7 +67,7 @@
 
 ---
 
-## 5. Yêu cầu Phi chức năng (OPTIONAL)
+## 4. Yêu cầu Phi chức năng (OPTIONAL)
 [Chỉ viết nếu tính năng có yêu cầu về NFR]
 
 | ID | Loại | Mô tả |
@@ -75,19 +75,19 @@
 | NFR-01 | | |
 | NFR-02 | | |
 
-## 6. Event tracking (Mix panel)
+## 5. Event tracking (Mix panel)
 [LUÔN mặc định viết: `Đừng quên em nhé`. Không cần mô tả thêm]
 
-## 7. Thiết kế API
+## 6. Thiết kế API
 [LUÔN mặc định viết: `N/A`. Không cần mô tả thêm]
 
-## 8. Thiết kế thuật toán
+## 7. Thiết kế thuật toán
 [LUÔN mặc định viết: `N/A`. Không cần mô tả thêm]
 
-## 9. Câu hỏi mở & Giả định (Optional)
+## 8. Câu hỏi mở & Giả định (Optional)
 [Bất kỳ điểm không chắc chắn hoặc giả định nào còn lại]
 
-## 10. Phụ lục (Optional)
+## 9. Phụ lục (Optional)
 [Chỉ viết khi có các thông tin bổ sung hoặc tham chiếu. Nếu không, viết `N/A`.]
 
 ```
@@ -97,7 +97,7 @@
 ## Ví dụ 1: Đặc tả chi tiết Use Case
 ### [Đăng nhập]
 
-#### 1 Use Case UC-001: [Đăng ký User]
+#### 1. UC-001: [Đăng ký User]
 | Tiêu đề | Mô tả |
 | --- | -------------- |
 | ID Use Case | UC-001 |

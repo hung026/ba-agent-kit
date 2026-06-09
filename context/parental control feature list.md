@@ -42,8 +42,8 @@
 | App cha mẹ | Cảnh báo khi truy cập | Ghi lại domain/URL, thời gian, trạng thái | FR-05: Smart Web Filtering |
 | App con | Giới hạn truy cập web | Phát hiện web site đang chạy, so sánh blacklist/rule và thực hiện hành động | FR-05: Smart Web Filtering |
 | App con | Giới hạn truy cập web | Phát hiện website đang chạy, so sánh blacklist/rule và thực hiện chặn | FR-05: Smart Web Filtering |
-| App cha mẹ | Bật Google Safe Search | Bật chế độ tìm kiếm an toàn trên công cụ hỗ trợ (Google, Bing) | FR-06: Safe Search Enforce |
-| App cha mẹ | Quản lý chặn lọc kênh Youtube | Giới hạn nội dung YouTube theo kênh, từ khoá | FR-06: Safe Search Enforce |
+| App cha mẹ | Bật Google Safe Search | Bật chế độ tìm kiếm an toàn trên công cụ hỗ trợ (Google, Bing) | FR-08: Safe Search Enforce |
+| App cha mẹ | Quản lý chặn lọc kênh Youtube | Giới hạn nội dung YouTube theo kênh, từ khoá | FR-08: Safe Search Enforce |
 | App con | Chống gỡ bỏ ứng dụng | Ngăn trẻ xóa App con khỏi thiết bị mà không có xác nhận phụ huynh | FR-02: Anti-Tamper |
 | App cha mẹ | Lịch sử truy cập web | Hiển thị các trang web đã truy cập theo thiết bị | FR-06: Activity Dashboard |
 | App cha mẹ | Lịch sử xem Youtube | Xem lịch sử xem Youtube của trẻ | FR-06: Activity Dashboard |
