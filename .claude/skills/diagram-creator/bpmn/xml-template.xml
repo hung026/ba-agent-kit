@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="definitions_1"
+             targetNamespace="http://bpmn.io/schema/bpmn"
+             exporter="bpmn-generator-skill"
+             exporterVersion="2.0">
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: COLLABORATION                                      -->
+  <!-- participants (pools) + ALL message flows (never trim — Rule B) -->
+  <!-- ============================================================ -->
+  <collaboration id="collaboration_1">
+
+    <!-- === PARTICIPANTS === one per actor -->
+    <!--
+    <participant id="participant_{actor}" name="{Actor Display Name}" processRef="process_{actor}" />
+    -->
+
+    <!-- === MESSAGE FLOWS === every cross-lane interaction; request+response are two flows -->
+    <!-- A message flow may target a Message Start Event in a reactive pool. -->
+    <!--
+    <messageFlow id="mf_{source}_to_{target}" name="{Label}" sourceRef="{source_element_id}" targetRef="{target_element_id}" />
+    -->
+
+  </collaboration>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: PROCESSES — one <process> per actor                -->
+  <!-- Initiating pool: ONE plain Start (Rule A).                     -->
+  <!-- Reactive pool: Message Start Event(s); independent fragments   -->
+  <!--   are NOT linked by sequence flow (Rule C).                    -->
+  <!-- ============================================================ -->
+
+  <!-- ---- INITIATING POOL ---- -->
+  <!--
+  <process id="process_{initiator}" isExecutable="false">
+    <startEvent id="start_{initiator}" name="Start">
+      <outgoing>{sf}</outgoing>
+    </startEvent>
+    <userTask id="task_{initiator}_{desc}" name="{...}">
+      <incoming>{sf}</incoming>
+      <outgoing>{sf}</outgoing>
+    </userTask>
+    <endEvent id="end_{initiator}_1" name="End">
+      <incoming>{sf}</incoming>
+    </endEvent>
+    <sequenceFlow id="sf_{a}_to_{b}" sourceRef="{a}" targetRef="{b}" />
+  </process>
+  -->
+
+  <!-- ---- REACTIVE POOL (may hold several disconnected fragments) ---- -->
+  <!--
+  <process id="process_{reactive}" isExecutable="false">
+
+    fragment 1
+    <startEvent id="start_{reactive}_{trigger1}" name="{Nhận ...}">
+      <messageEventDefinition id="msgdef_{reactive}_1" />
+      <outgoing>{sf}</outgoing>
+    </startEvent>
+    <serviceTask id="task_{reactive}_{desc1}" name="{...}">
+      <incoming>{sf}</incoming>
+      <outgoing>{sf}</outgoing>
+    </serviceTask>
+    <endEvent id="end_{reactive}_1" name="End"><incoming>{sf}</incoming></endEvent>
+
+    fragment 2 (NOT connected to fragment 1)
+    <startEvent id="start_{reactive}_{trigger2}" name="{Nhận ...}">
+      <messageEventDefinition id="msgdef_{reactive}_2" />
+      <outgoing>{sf}</outgoing>
+    </startEvent>
+    <serviceTask id="task_{reactive}_{desc2}" name="{...}">
+      <incoming>{sf}</incoming>
+      <outgoing>{sf}</outgoing>
+    </serviceTask>
+    <endEvent id="end_{reactive}_2" name="End"><incoming>{sf}</incoming></endEvent>
+
+  </process>
+  -->
+
+  <!-- Gateway (XOR) split with labelled branches -->
+  <!--
+    <exclusiveGateway id="gw_{actor}_{desc}" name="{Condition?}">
+      <incoming>{sf}</incoming>
+      <outgoing>{sf_yes}</outgoing>
+      <outgoing>{sf_no}</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="sf_gw_to_yes" name="Có"   sourceRef="{gw}" targetRef="{yes}" />
+    <sequenceFlow id="sf_gw_to_no"  name="Không" sourceRef="{gw}" targetRef="{no}" />
+  -->
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: DIAGRAM INTERCHANGE (DI)                           -->
+  <!-- Heights vary per pool; pool tops are cumulative.              -->
+  <!-- See layout-algorithm.md.                                      -->
+  <!-- ============================================================ -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="collaboration_1">
+
+      <!-- Pool: simple = height 200, branch = height 320 -->
+      <!--
+      <bpmndi:BPMNShape id="shape_participant_{actor}" bpmnElement="participant_{actor}" isHorizontal="true">
+        <dc:Bounds x="160" y="{pool_top}" width="{pool_width}" height="{200 or 320}" />
+      </bpmndi:BPMNShape>
+      -->
+
+      <!-- Start / Message Start / End event (36x36) -->
+      <!--
+      <bpmndi:BPMNShape id="shape_start_{actor}" bpmnElement="start_{actor}">
+        <dc:Bounds x="{x}" y="{y}" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      -->
+
+      <!-- Task (100x80) -->
+      <!--
+      <bpmndi:BPMNShape id="shape_task_{id}" bpmnElement="task_{id}">
+        <dc:Bounds x="{x}" y="{y}" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      -->
+
+      <!-- Gateway (50x50) -->
+      <!--
+      <bpmndi:BPMNShape id="shape_gw_{id}" bpmnElement="gw_{id}" isMarkerVisible="true">
+        <dc:Bounds x="{x}" y="{y}" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      -->
+
+      <!-- Sequence flow, straight (2 waypoints) -->
+      <!--
+      <bpmndi:BPMNEdge id="edge_{sf}" bpmnElement="{sf}">
+        <di:waypoint x="{src_right}" y="{main_y}" />
+        <di:waypoint x="{tgt_left}"  y="{main_y}" />
+      </bpmndi:BPMNEdge>
+      -->
+
+      <!-- Sequence flow, "Không" branch down then right (3 waypoints) -->
+      <!--
+      <bpmndi:BPMNEdge id="edge_{sf_no}" bpmnElement="{sf_no}">
+        <di:waypoint x="{gw_cx}" y="{gw_bottom}" />
+        <di:waypoint x="{gw_cx}" y="{branch_y}" />
+        <di:waypoint x="{tgt_left}" y="{branch_y}" />
+      </bpmndi:BPMNEdge>
+      -->
+
+      <!-- Message flow, vertical across pools (2 waypoints) -->
+      <!--
+      <bpmndi:BPMNEdge id="edge_{mf}" bpmnElement="{mf}">
+        <di:waypoint x="{src_center_x}" y="{src_bottom_edge}" />
+        <di:waypoint x="{tgt_center_x}" y="{tgt_top_edge}" />
+      </bpmndi:BPMNEdge>
+      -->
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>
