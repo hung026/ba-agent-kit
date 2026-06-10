@@ -1,0 +1,96 @@
+<!--
+  PATTERN: p-cascade  (THAY THẾ cách vẽ cascade cũ bị chồng)
+  Dùng khi: ≥2 exclusive gateway nối tiếp, mỗi GW có 1 nhánh thoát riêng.
+  Điển hình: chuỗi kiểm tra (check A → check B → check C → else).
+
+  NGUYÊN TẮC: nhánh thoát đi DỌC XUỐNG (không đi ngang) → mỗi GW chỉ tốn 1 cột → KHÔNG chồng.
+
+  Layout (1 lane, h=300):
+    Tầng GW   (main): y=30   → GW spans 30–90
+    Tầng exit (thoát): y=130 → exit task spans 130–190  (gap 40px)
+    Tầng end:          y=230 → end event spans 230–280   (gap 40px)
+
+  Cột (gw_x = 50 + (i−1)×200):  GW1 x=250  GW2 x=450  GW3 x=650
+    exit_x = gw_x − 40   |   end_x = gw_x + 5
+  → verify.js: SẠCH.
+-->
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0">
+  <diagram id="p-cascade" name="Pattern: Cascade dọc">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- POOL -->
+        <mxCell id="pool" value="[Tên quy trình — chuỗi kiểm tra]" style="swimlane;html=1;horizontal=0;startSize=30;fontStyle=1;fontSize=13;fillColor=none;strokeColor=#000000;swimlaneFillColor=#ffffff;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="40" y="40" width="1010" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- Lane (h=300) -->
+        <mxCell id="lC" value="ACTOR" style="swimlane;html=1;horizontal=0;startSize=30;fontStyle=1;fontSize=12;fillColor=none;strokeColor=#000000;swimlaneFillColor=#ffffff;fontColor=#000000;" parent="pool" vertex="1">
+          <mxGeometry x="30" y="0" width="980" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- MAIN PATH: col1 task vào, GW1 col2, GW2 col3, GW3 col4, end else col5 -->
+        <mxCell id="tIn" value="IN_TASK" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="50" y="30" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gw1" value="CHECK_A?" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="250" y="30" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gw2" value="CHECK_B?" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="450" y="30" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gw3" value="CHECK_C?" style="points=[[0.25,0.25,0],[0.5,0,0],[0.75,0.25,0],[1,0.5,0],[0.75,0.75,0],[0.5,1,0],[0.25,0.75,0],[0,0.5,0]];shape=mxgraph.bpmn.gateway2;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=rhombusPerimeter;outlineConnect=0;outline=none;symbol=none;gwType=exclusive;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="650" y="30" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="endElse" value="END_ELSE" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=end;symbol=terminate;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="850" y="35" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- NHÁNH THOÁT 1 (dưới GW1): exit x=210 y=130, end x=255 y=230 -->
+        <mxCell id="ex1" value="EXIT_A" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="210" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end1" value="END_A" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=end;symbol=terminate;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="255" y="230" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- NHÁNH THOÁT 2 (dưới GW2): exit x=410, end x=455 -->
+        <mxCell id="ex2" value="EXIT_B" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="410" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end2" value="END_B" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=end;symbol=terminate;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="455" y="230" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- NHÁNH THOÁT 3 (dưới GW3): exit x=610, end x=655 -->
+        <mxCell id="ex3" value="EXIT_C" style="points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];shape=mxgraph.bpmn.task;whiteSpace=wrap;rectStyle=rounded;size=10;html=1;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="610" y="130" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="end3" value="END_C" style="points=[[0.145,0.145,0],[0.5,0,0],[0.855,0.145,0],[1,0.5,0],[0.855,0.855,0],[0.5,1,0],[0.145,0.855,0],[0,0.5,0]];shape=mxgraph.bpmn.event;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;aspect=fixed;outline=end;symbol=terminate;strokeColor=#000000;fillColor=#ffffff;fontColor=#000000;" parent="lC" vertex="1">
+          <mxGeometry x="655" y="230" width="50" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Edges main path (ngang): exitX=1 entryX=0 -->
+        <mxCell id="f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="tIn" target="gw1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f2" value="Tiếp tục" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontSize=11;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="gw1" target="gw2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f3" value="Tiếp tục" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontSize=11;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="gw2" target="gw3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f4" value="ELSE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontSize=11;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="gw3" target="endElse" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- Edges nhánh thoát (dọc xuống): exitX=0.5 exitY=1 entryX=0.5 entryY=0 -->
+        <mxCell id="f5" value="COND_A" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontSize=11;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" source="gw1" target="ex1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" source="ex1" target="end1" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f7" value="COND_B" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontSize=11;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" source="gw2" target="ex2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" source="ex2" target="end2" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f9" value="COND_C" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;fontSize=11;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" source="gw3" target="ex3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="f10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" source="ex3" target="end3" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
