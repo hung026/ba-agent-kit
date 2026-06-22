@@ -43,15 +43,13 @@ For each use case, systematically check:
 - Network failure / timeout
 - Server errors (500, 503, rate limiting)
 - Invalid or malformed input
-- Session expiry mid-flow
 - Device / browser edge cases (if applicable)
 
-**For each edge case found, document:**
-```
-Scenario: [What happens]
-System Action: [What system does]
-Fallback: [If primary handling also fails]
-```
+**For each edge case found, document these points:**
+- Lỗi: [What happens]
+- Xử lý: [How system should handle]
+- Cơ chế fallback: [If primary handling also fails]
+
 
 ---
 
@@ -98,7 +96,20 @@ If any use case involves the following → add `⚠ Sensitive data. Legal check 
 
 ---
 
-## 2.6 Analysis Output
+## 2.7 Default state
+
+- **Initial UI state**: What the user sees when they first encounter this feature (e.g., Empty state: "No history. Create new conversation here").
+
+
+---
+
+## 2.8. Sorting/Ordering Rules
+
+- **Default data organization logic**: For every item list, data structure,..., define how is sorted (e.g., "Sort by latest created date").
+
+---
+
+## 2.9 Analysis Output
 
 Before moving to Stage 3, produce an internal analysis summary (not shown to user unless asked):
 

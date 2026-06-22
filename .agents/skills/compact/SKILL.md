@@ -1,12 +1,8 @@
 ---
 name: compact
 description:
-  Compress a long conversation into a portable summary block that can be pasted
-  into a new chat session so the AI picks up exactly where it left off.
-  Trigger this skill whenever the user types "/compact",
-  "compact this", "tóm tắt conversation", "nén conversation", "summarize this chat",
-  or any phrase that signals they want to compress the current conversation into
-  a carry-over summary. 
+  Compress a long conversation into a portable summary block that can be pasted into a new chat session so the AI picks up exactly where it left off.
+  Trigger this skill whenever the user types "/compact", "compact this", "tóm tắt conversation", "nén conversation", "summarize this chat", or any phrase that signals they want to compress the current conversation into a carry-over summary. 
 ---
 
 # Compact — Conversation Compressor
@@ -14,11 +10,9 @@ description:
 ## Purpose
 
 Replace a long, token-heavy conversation with a single structured summary block.
-The user copies this block into a new chat → the new AI session understands the
-full context (role, goal, decisions, current state) and continues seamlessly.
+The user copies this block into a new chat → the new AI session understands the full context (role, goal, decisions, current state) and continues seamlessly.
 
-This is the manual equivalent of Claude Code's `/compact` command, adapted for
-any chat-based AI interface.
+This is the manual equivalent of Claude Code's `/compact` command, adapted for any chat-based AI interface.
 
 ---
 
@@ -28,8 +22,7 @@ When triggered:
 
 ### Step 1 — Scan the full conversation
 
-Read the entire conversation from first message to the message just before
-the compact trigger. Identify:
+Read the entire conversation from first message to the message just before the compact trigger. Identify:
 
 - **Objective**: What is the user trying to accomplish?
 - **Key decisions**: What was agreed upon, chosen, or ruled out?
@@ -45,9 +38,7 @@ If mixed languages, use the language of the majority of user messages.
 
 ### Step 3 — Generate the Compact Block
 
-Output the summary using the exact template below. The block must be
-self-contained — a new AI session reading ONLY this block should have enough
-context to continue the work without asking "what were we doing?".
+Output the summary using the exact template below. The block must be self-contained — a new AI session reading ONLY this block should have enough context to continue the work without asking "what were we doing?".
 
 ### Step 4 — Give paste instruction
 
@@ -58,9 +49,7 @@ copy the block above, open a new chat, paste it as the first message.
 
 ## Output Template
 
-Always use this exact structure. Omit any section that has no content
-(e.g., skip Artifacts if none were produced). Keep each section concise —
-the goal is compression, not transcription.
+Always use this exact structure. Omit any section that has no content (e.g., skip Artifacts if none were produced). Keep each section concise — the goal is compression, not transcription.
 
 ```markdown
 ## CONVERSATION SUMMARY

@@ -14,7 +14,7 @@
 
 ## 2. Danh sách Use Case
 
-| Nhóm chức năng | ID Use Case | Tên Use Case | Actor | Điều kiện trước | Điều kiện sau|
+| Nhóm chức năng | ID Use Case | Tên Use Case | Actor | Pre-condition | Post-condition|
 |-------------|-------------|---------------|---------------|----------------|-----------------|
 | ... | UC-001 | ... | ... | ... | ... |
 
@@ -29,11 +29,11 @@
 | ID Use Case | |
 | Tên Use Case | |
 | Mô tả | |
-| Actor chính | |
-| Điều kiện trước | |
-| Kích hoạt (Trigger) | |
-| Điều kiện sau – Thành công | |
-| Điều kiện sau – Thất bại | |
+| Actor | |
+| Pre-condition | |
+| Trigger | |
+| Post-condition – Thành công | |
+| Post-condition – Thất bại | |
 
 #### 2. Luồng chính (Happy Path)
 
@@ -65,9 +65,7 @@
 | EF-01 | Bước | | |  | |
 | EF-02 | Bước | | |  | |
 
----
-
-## 4. Yêu cầu Phi chức năng (OPTIONAL)
+#### 6. Yêu cầu Phi chức năng (OPTIONAL)
 [Chỉ viết nếu tính năng có yêu cầu về NFR]
 
 | ID | Loại | Mô tả |
@@ -75,19 +73,22 @@
 | NFR-01 | | |
 | NFR-02 | | |
 
-## 5. Event tracking (Mix panel)
+#### 7. Thiết kế giao diện
+[LUÔN mặc định viết: `N/A`. Không cần mô tả thêm]
+
+#### 8. Event tracking (Mix panel)
 [LUÔN mặc định viết: `Đừng quên em nhé`. Không cần mô tả thêm]
 
-## 6. Thiết kế API
+#### 9. Thiết kế API
 [LUÔN mặc định viết: `N/A`. Không cần mô tả thêm]
 
-## 7. Thiết kế thuật toán
+#### 10. Thiết kế thuật toán
 [LUÔN mặc định viết: `N/A`. Không cần mô tả thêm]
 
-## 8. Câu hỏi mở & Giả định (Optional)
+### 3.2. Câu hỏi mở & Giả định (Optional)
 [Bất kỳ điểm không chắc chắn hoặc giả định nào còn lại]
 
-## 9. Phụ lục (Optional)
+### 3.3. Phụ lục (Optional)
 [Chỉ viết khi có các thông tin bổ sung hoặc tham chiếu. Nếu không, viết `N/A`.]
 
 ```
@@ -105,9 +106,9 @@
 | Mô tả | User đăng ký tài khoản mới |
 | Actor chính | User |
 | Điều kiện tiên quyết | Thiết bị của User có kết nối internet |
-| Kích hoạt (Trigger) | User nhấn "Tạo tài khoản mới" |
-| Điều kiện sau – Thành công | User tạo tài khoản mới thành công |
-| Điều kiện sau – Thất bại | Hệ thống hiển thị thông báo lỗi tương ứng |
+| Trigger | User nhấn "Tạo tài khoản mới" |
+| Post-condition – Thành công | User tạo tài khoản mới thành công |
+| Post-condition – Thất bại | Hệ thống hiển thị thông báo lỗi tương ứng |
 
 #### 2. Luồng chính (Happy Path)
 

@@ -13,7 +13,7 @@
 
 ## 2. User Story List
 
-| User Story ID | User Story | Actor | Điều kiện trước | Điều kiện sau |
+| User Story ID | User Story | Actor | Pre-condition | Post-condition |
 |---------------|----------------|---------------|----------------|-----------------|
 | US-001 | ... | ... | ... | ... |
 
@@ -55,7 +55,7 @@ US-002, US-005 (nếu có)
 
 ### Ví dụ 1: Danh sách user story
 
-| User Story ID | User Story | Actor/Persona | Pre-conditions | Post-conditions |
+| User Story ID | User Story | Actor | Pre-conditions | Post-conditions |
 |-------------|---------------|---------------|----------------|-----------------|
 | US-001 | Đăng ký người dùng | Người dùng mới | Có email hợp lệ, chưa đăng ký | Tài khoản đã tạo, đã gửi email xác thực |
 | US-002 | Xác thực email | Người dùng mới | US-001 hoàn tất, link xác thực hợp lệ | Tài khoản được kích hoạt, có thể login |
