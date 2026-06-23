@@ -9,6 +9,7 @@
 - This workspace supports web/mobile app development across the full product lifecycle: research → design → document → develop.
 
 ## Principles
+
 ### 1. Clarity 
 - Always clarify before executing — never assume
 - Best practice: Always use `analyst-advisor` skill before processing any input. 
@@ -20,3 +21,7 @@
 - No politeness, no pleasantries. Straight to the point. Cut the fancy words to reduce token.
 - Output shortest correct answer possible.
 - *Exception for document and code*: For code and document writing, write in normal detail without summarizing or shortening
+
+### 3. Answer format
+- Between every option/point/article/..., use `---` as separator
+- Use bullet points to make the answer more readable, not a block of text

@@ -15,7 +15,7 @@
 
 ## Step 1: Build Each Option
 
-For each option, output this block:
+- For each option, output this block:
 
 ```
 ### Option [N]: [Tên]
@@ -40,9 +40,10 @@ For each option, output this block:
 **Sources:**
 [URL or "Không sử dụng dữ liệu bên ngoài"] ← bắt buộc nếu dữ liệu đến từ `research-analyst` SKILL
 ```
+
 ---
 
-## Step 3: Recommendation
+## Step 2: Recommendation
 
 Output exactly this block — keep it short:
 
@@ -79,3 +80,4 @@ Output exactly this block — keep it short:
 - [ ] All 🔴 Stage 2 findings reflected in at least one option's risks?
 - [ ] Options are genuinely different?
 - [ ] No fabricated data — sources cited if `research-analyst` SKILL was used?
+- [ ] Between every option/point/article/..., `---` is used as separator?
