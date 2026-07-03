@@ -116,7 +116,7 @@ THEN dẫn thẳng vào màn hình quản lý, không hiển thị lại onboard
 
 ---
 
-#### US-02-P: Đăng nhập bằng SĐT + OTP
+#### US-02-P: Đăng nhập bằng SĐT + OTP 
 
 1. **US statement**
 **As a** phụ huynh

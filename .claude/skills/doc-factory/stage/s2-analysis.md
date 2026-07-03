@@ -16,13 +16,14 @@
 
 ## 2.2 Multi-Lens Analysis
 
-For each use case in confirmed scope, run through all three lenses:
+For each use case in confirmed scope, run through all four lenses:
 
 | Lens | Questions to answer |
 |---|---|
 | **Dev** | What's ambiguous that a developer would get stuck on? What integration points are undefined? What data flows are missing? |
 | **QA** | What's the acceptance criteria? What would fail in testing? What's untestable as written? |
 | **User** | What would confuse the end user? What happens in the UI during errors or loading? What if the user does something unexpected? |
+| **Data/Backend** | What core data does this **write** to the DB? What data does it **read** from the DB to feed the UI? Which API endpoints does each step imply? Where does state live (client vs server)? |
 
 Document every gap found. These feed directly into the draft.
 
@@ -100,10 +101,9 @@ If any use case involves the following → add `⚠ Sensitive data. Legal check 
 
 - **Initial UI state**: What the user sees when they first encounter this feature (e.g., Empty state: "No history. Create new conversation here").
 
-
 ---
 
-## 2.8. Sorting/Ordering Rules
+## 2.8 Sorting/Ordering Rules
 
 - **Default data organization logic**: For every item list, data structure,..., define how is sorted (e.g., "Sort by latest created date").
 
@@ -123,6 +123,11 @@ Before moving to Stage 3, produce an internal analysis summary (not shown to use
 ### Edge Cases to Cover
 - [list]
 
+### Data & Backend Mapping
+- [UC/US id]: WRITE → `table`: fields · `METHOD /path`
+- [UC/US id]: READ  → `table`: fields · `METHOD /path`
+- [entities reused across use cases + naming kept consistent]
+
 ### Open Questions
 - [questions that need stakeholder input]
 
@@ -133,4 +138,4 @@ Before moving to Stage 3, produce an internal analysis summary (not shown to use
 - [any flags]
 ```
 
-This summary drives what gets written in the doc. → Proceed to Stage 3.
+This summary drives what gets written in the doc → Proceed to Stage 3.

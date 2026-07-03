@@ -2,6 +2,7 @@
 
 ## Rules:**
 - Sections that contains "(Optional)" in section header can be skipped if there is no information, or is not required by user
+- In article `7. Thiết kế giao diện`,  `API mapping` and `Database mapping` is optional. Only add if really necessary.
 
 ## Document Structure
 
@@ -40,7 +41,13 @@ US-002, US-005 (nếu có)
 | :--- | :--- | :--- |
 | [tên exception] | [cách xử lý exception] | [nếu xử lý exception vẫn lỗi thì làm gì] |
 
-5. **Technical Context & NFR** (nếu cần):
+5. **Mô tả giao diện**:
+
+| Trường UI | Mô tả | Kiểu / Validate | API mapping | Database mapping |
+|---|---|---|---|---|
+| [điền `-`] | [mô tả 1 bước trong nghiệp vụ] | [loại component + rule validation] | [tên bước nghiệp vụ] · `[METHOD] [/đường-dẫn-api]` | Bảng `[tên_bảng]`: [tên_trường_tương_ứng] | 
+
+6. **Technical Context & NFR** (nếu cần):
 [Bất kỳ chi tiết kỹ thuật/business rules nào giúp developer hiểu cách triển khai, hoặc yêu cầu phi chức năng (NFR)]
 
 **
@@ -112,6 +119,16 @@ And tôi thấy một liên kết đến trang login
 - Rate limit: 5 lần thử đăng ký mỗi IP mỗi giờ
 - Chỉ hỗ trợ dòng Samsung Galaxy S24 trở lên
 - Không hỗ trợ icon, chỉ text
+
+### Ví dụ 3: Thiết kế giao diện
+Ví dụ cách viết 1 bảng mô tả giao diện
+
+| Trường UI | Mô tả | Kiểu / Validate | API mapping | Database mapping |
+|---|---|---|---|---|
+| - | Tên đầy đủ của khách hàng | Text input, bắt buộc, max 100 ký tự | | |
+| - | SĐT liên hệ chính, dùng định danh | Text input, bắt buộc, 10 số, unique | Check trùng · `POST /api/customer/check-phone`| Bảng `customer`: `phone` | 
+| - | Nơi cư trú của khách hàng | Dropdown, bắt buộc | Load form · `GET /api/customer/init` | Bảng `province`: `id`, `name` |
+| - | Lưu thông tin khách hàng | Button, mặc định disable. Enable khi tên và số điện thoại hợp lệ | Lưu KH · `POST /api/customer/create`  | Bảng `province`: `id`, `name` |
 
 ---
 
