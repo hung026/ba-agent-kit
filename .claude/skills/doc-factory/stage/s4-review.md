@@ -35,14 +35,7 @@
 
 - Do all numeric values have source annotations or formula?
 - Are all sensitive data fields flagged with the legal check note?
-
-## Data & Backend Mapping
-
-- Does every use case that has a UI show its data flow — what it WRITEs to the DB and what it READs from the DB?
-- Is every WRITE/READ from the Stage 2 Data & Backend Analysis reflected in the `API mapping` / `Database mapping` columns (SRS/US) or in `2.4 Yêu cầu kỹ thuật` (BRD)?
-- Are table names, field names, and API endpoints **consistent across all use cases** — same entity never renamed, same action never mapped to two endpoints?
-- Are the API/DB mappings marked as proposals needing BE confirmation?
-- Are client-only steps left without an invented endpoint (empty mapping cells), rather than a fabricated API?
+- For the steps related to save/create/delete/..., is there any details saying where the data to be saved, or how it to be deleted?
 
 ## ID Numbering
 - Do all internal IDs (e.g., AF-01, BR-01, EF-01) correctly restart from 01 at the beginning of each new Use Case?

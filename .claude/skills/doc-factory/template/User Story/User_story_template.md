@@ -35,17 +35,11 @@
 
 3. **Exception & Edge Cases**:
 
-| Scenario | Cách xử lý | Cơ chế Fallback |
+| Scenario | Error message | Mô tả lỗi |
 | :--- | :--- | :--- |
-| [tên exception] | [cách xử lý exception] | [nếu xử lý exception vẫn lỗi thì làm gì] |
+| [tên exception] | [nội dung báo lỗi show trên giao diện] | [Mô tả hình thức hiển thị lỗi (toast, popup, inline,...) và các hành vi của user, hệ thống] |
 
-4. **Mô tả giao diện**:
-
-| Trường UI | Mô tả | Kiểu / Validate | API mapping | Database mapping |
-|---|---|---|---|---|
-| [điền `-`] | [mô tả 1 bước trong nghiệp vụ] | [loại component + rule validation] | [tên bước nghiệp vụ] · `[METHOD] [/đường-dẫn-api]` | Bảng `[tên_bảng]`: [tên_trường_tương_ứng] | 
-
-5. **Technical Context & NFR** (nếu cần):
+4. **Technical Context & NFR** (nếu cần):
 [Bất kỳ chi tiết kỹ thuật/business rules nào giúp developer hiểu cách triển khai, hoặc yêu cầu phi chức năng (NFR)]
 
 **
@@ -99,15 +93,15 @@ And tôi thấy một liên kết đến trang login
 
 3. **Exception & Edge Cases**:
 
-| Scenario | Cách xử lý | Cơ chế Fallback |
+| Scenario | Error message | Mô tả lỗi |
 | :--- | :--- | :--- |
-| Email service lỗi | Đưa email vào hàng đợi background job, thử lại mỗi 5 phút trong 1 giờ | Hiện cảnh báo "Email bị chậm, kiểm tra thư rác. Không nhận được? Nhấn gửi lại" |
-| Đăng ký trùng lặp khi đang xử lý | Database unique constraint ngăn chặn trùng lặp, trả về 409 Conflict | Hiện "Email này vừa mới được đăng ký. Vui lòng đăng nhập" |
-| Định dạng email không hợp lệ | Validation phía client chặn submit, kiểm tra regex trên server | Hiện lỗi nội dòng "Vui lòng nhập địa chỉ email hợp lệ" |
-| Tấn công SQL injection | Parameterized queries ngăn chặn injection, log hoạt động nghi vấn | Trả về lỗi chung 400 Bad Request, kích hoạt security alert |
-| Vượt quá Rate limit | Trả về 429 Too Many Requests với header retry-after | Hiện "Quá nhiều lần thử. Vui lòng thử lại sau [X] phút" |
-| Network timeout | Hiện toast Mất kết nối, thử lại 3 lần | Cache dữ liệu cục bộ, cho phép chế độ offline |
-| Định dạng email không hợp lệ | Hiện lỗi nội dòng Vui lòng nhập email hợp lệ | Bôi đỏ trường nhập, vô hiệu hóa submit |
+| Email service lỗi | "Email bị chậm, kiểm tra thư rác. Không nhận được? Nhấn gửi lại" | Đưa email vào hàng đợi background job, thử lại mỗi 5 phút trong 1 giờ |
+| Đăng ký trùng lặp khi đang xử lý | "Email này vừa mới được đăng ký. Vui lòng đăng nhập" | Database unique constraint ngăn chặn trùng lặp, trả về 409 Conflict |
+| Định dạng email không hợp lệ | "Vui lòng nhập địa chỉ email hợp lệ" | Validation phía client chặn submit, kiểm tra regex trên server |
+| Tấn công SQL injection | "" | Parameterized queries ngăn chặn injection, log hoạt động nghi vấn |
+| Vượt quá Rate limit | "Quá nhiều lần thử. Vui lòng thử lại sau [X] phút"| Trả về 429 Too Many Requests với header retry-after |
+| Network timeout | "Mất kết nối. Thử lại sau ít phút" | Hiển thị dạng toast. Cache dữ liệu cục bộ, cho phép chế độ offline |
+| Định dạng email không hợp lệ |  "Vui lòng nhập email hợp lệ" | Bôi đỏ trường nhập, vô hiệu hóa submit |
 
 4. **Technical Context & NFR**:
 - Mật khẩu phải được hashed bằng bcrypt (tối thiểu 10 salt rounds)
@@ -115,16 +109,6 @@ And tôi thấy một liên kết đến trang login
 - Rate limit: 5 lần thử đăng ký mỗi IP mỗi giờ
 - Chỉ hỗ trợ dòng Samsung Galaxy S24 trở lên
 - Không hỗ trợ icon, chỉ text
-
-### Ví dụ 3: Thiết kế giao diện
-Ví dụ cách viết 1 bảng mô tả giao diện
-
-| Trường UI | Mô tả | Kiểu / Validate | API mapping | Database mapping |
-|---|---|---|---|---|
-| - | Tên đầy đủ của khách hàng | Text input, bắt buộc, max 100 ký tự | | |
-| - | SĐT liên hệ chính, dùng định danh | Text input, bắt buộc, 10 số, unique | Check trùng · `POST /api/customer/check-phone`| Bảng `customer`: `phone` | 
-| - | Nơi cư trú của khách hàng | Dropdown, bắt buộc | Load form · `GET /api/customer/init` | Bảng `province`: `id`, `name` |
-| - | Lưu thông tin khách hàng | Button, mặc định disable. Enable khi tên và số điện thoại hợp lệ | Lưu KH · `POST /api/customer/create`  | Bảng `province`: `id`, `name` |
 
 ---
 

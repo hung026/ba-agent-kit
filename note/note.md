@@ -44,3 +44,9 @@
 - Main language: Vietnamese
 - Only use English or others only when being asked to
 ```
+
+7. UI
+
+| Trường UI | Mô tả | Kiểu / Validate | API mapping | Database mapping |
+|---|---|---|---|---|
+| [điền `-`] | [mô tả 1 bước trong nghiệp vụ] | [loại component + rule validation] | [tên bước nghiệp vụ] · `[METHOD] [/đường-dẫn-api]` | Bảng `[tên_bảng]`: [tên_trường_tương_ứng] | 

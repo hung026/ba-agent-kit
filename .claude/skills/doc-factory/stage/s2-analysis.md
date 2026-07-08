@@ -107,9 +107,15 @@ If any use case involves the following → add `⚠ Sensitive data. Legal check 
 
 - **Default data organization logic**: For every item list, data structure,..., define how is sorted (e.g., "Sort by latest created date").
 
+--- 
+
+## 2.9 Data/Backend
+
+- **Data**: Consider all data need to be written/saved to the database and data need to be read from the database.
+
 ---
 
-## 2.9 Analysis Output
+## 2.10 Analysis Output
 
 Before moving to Stage 3, produce an internal analysis summary (not shown to user unless asked):
 
