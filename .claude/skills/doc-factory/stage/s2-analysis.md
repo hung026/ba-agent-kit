@@ -23,7 +23,6 @@ For each use case in confirmed scope, run through all four lenses:
 | **Dev** | What's ambiguous that a developer would get stuck on? What integration points are undefined? What data flows are missing? |
 | **QA** | What's the acceptance criteria? What would fail in testing? What's untestable as written? |
 | **User** | What would confuse the end user? What happens in the UI during errors or loading? What if the user does something unexpected? |
-| **Data/Backend** | What core data does this **write** to the DB? What data does it **read** from the DB to feed the UI? Which API endpoints does each step imply? Where does state live (client vs server)? |
 
 Document every gap found. These feed directly into the draft.
 
@@ -47,10 +46,10 @@ For each use case, systematically check:
 - Device / browser edge cases (if applicable)
 
 **For each edge case found, document these points:**
-- Lỗi: [What happens]
-- Xử lý: [How system should handle]
-- Cơ chế fallback: [If primary handling also fails]
-
+- Loại: [Type of UI error display — inline, toast, popup,...]
+- Title: [Title shown when the error displays; usually blank if Loại is inline or toast]
+- Error message: [What to show on the UI]
+- Trigger: [What happens / condition that causes the error]
 
 ---
 
@@ -107,15 +106,9 @@ If any use case involves the following → add `⚠ Sensitive data. Legal check 
 
 - **Default data organization logic**: For every item list, data structure,..., define how is sorted (e.g., "Sort by latest created date").
 
---- 
-
-## 2.9 Data/Backend
-
-- **Data**: Consider all data need to be written/saved to the database and data need to be read from the database.
-
 ---
 
-## 2.10 Analysis Output
+## 2.9 Analysis Output
 
 Before moving to Stage 3, produce an internal analysis summary (not shown to user unless asked):
 
@@ -128,11 +121,6 @@ Before moving to Stage 3, produce an internal analysis summary (not shown to use
 
 ### Edge Cases to Cover
 - [list]
-
-### Data & Backend Mapping
-- [UC/US id]: WRITE → `table`: fields · `METHOD /path`
-- [UC/US id]: READ  → `table`: fields · `METHOD /path`
-- [entities reused across use cases + naming kept consistent]
 
 ### Open Questions
 - [questions that need stakeholder input]

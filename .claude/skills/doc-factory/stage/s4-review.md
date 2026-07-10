@@ -35,7 +35,6 @@
 
 - Do all numeric values have source annotations or formula?
 - Are all sensitive data fields flagged with the legal check note?
-- For the steps related to save/create/delete/..., is there any details saying where the data to be saved, or how it to be deleted?
 
 ## ID Numbering
 - Do all internal IDs (e.g., AF-01, BR-01, EF-01) correctly restart from 01 at the beginning of each new Use Case?
