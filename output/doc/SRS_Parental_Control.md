@@ -148,20 +148,20 @@ N/A
 
 ---
 
-### UC-04: Hiển thị danh sách thiết bị + Trạng thái online/offline
+### UC-04: Hiển thị danh sách thiết bị + Trạng thái hoạt động
 
 **1. Thông tin chung**
 
-| Tiêu đề                     | Mô tả                                                                                                                                                                                                                          |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ID Use Case                    | UC-04 (FR-01)                                                                                                                                                                                                                    |
-| Tên Use Case                  | Xác nhận thiết bị con đã ghép nối + trạng thái hoạt động                                                                                                                                                            |
-| Mô tả                        | Phụ huynh thấy xác nhận realtime khi máy con ghép nối xong, biết thiết bị đã được quản lý, rule bắt đầu áp dụng, và theo dõi được trạng thái hoạt động/ngưng hoạt động của từng thiết bị |
-| Actor                          | Phụ huynh                                                                                                                                                                                                                       |
-| Pre-condition                  | Đã hoàn tất UC-01, UC-03 (FR-01) + UC-01 (FR-03); vừa quét QR máy con                                                                                                                                                     |
-| Trigger                        | Máy bố mẹ quét QR máy con và ghép nối thành công (server xác thực hợp lệ)                                                                                                                                          |
-| Post-condition – Thành công | App Parents cập nhật trạng thái thành công, chuyển Dashboard trong ≤ 3 giây; thiết bị xuất hiện trong danh sách hồ sơ trẻ                                                                                       |
-| Post-condition – Thất bại   | Ghép nối thất bại → App Parents giữ nguyên màn quét QR                                                                                                                                                                  |
+| Tiêu đề                     | Mô tả                                                                                                                                                                                                       |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID Use Case                    | UC-04 (FR-01)                                                                                                                                                                                                 |
+| Tên Use Case                  | Xác nhận thiết bị con đã ghép nối + trạng thái hoạt động                                                                                                                                         |
+| Mô tả                        | Phụ huynh thấy xác nhận realtime khi máy con ghép nối xong, biết thiết bị đã được quản lý, rule bắt đầu áp dụng, và theo dõi được trạng thái hoạt động của từng thiết bị |
+| Actor                          | Phụ huynh                                                                                                                                                                                                    |
+| Pre-condition                  | Đã hoàn tất UC-01, UC-03 (FR-01) + UC-01 (FR-03); vừa quét QR máy con                                                                                                                                  |
+| Trigger                        | Máy bố mẹ quét QR máy con và ghép nối thành công (server xác thực hợp lệ)                                                                                                                       |
+| Post-condition – Thành công | App Parents cập nhật trạng thái thành công, chuyển Dashboard trong ≤ 3 giây; thiết bị xuất hiện trong danh sách hồ sơ trẻ                                                                    |
+| Post-condition – Thất bại   | Ghép nối thất bại → App Parents giữ nguyên màn quét QR                                                                                                                                               |
 
 **2. Luồng chính (Happy Path)**
 
@@ -174,20 +174,20 @@ N/A
 
 **3. Luồng thay thế (Alternative Flow)**
 
-| ID Luồng | Bước   | Mô tả                                                                                                                                                                            |
-| :-------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AF-01     | Bước 2 | Ghép nối thất bại (mất mạng, lỗi thiết bị, QR hết hạn...) → App Parents giữ nguyên ở màn quét QR                                                                  |
-| AF-02     | Bước 4 | Xem chi tiết profile con → hiển thị danh sách thiết bị, mỗi thiết bị: tên thiết bị, nền tảng (Android/iOS), thời điểm ghép nối,*trạng thái online/offline* |
-| AF-03     | Bước 4 | Thiết bị đang hoạt động → hiện "online"<br /><br />Thiết bị ngưng hoạt động → hiện "offline" (xem định nghĩa PL-02)                                             |
+| ID Luồng | Bước   | Mô tả                                                                                                                                                                                                                                                        |
+| :-------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AF-01     | Bước 2 | Ghép nối thất bại (mất mạng, lỗi thiết bị, QR hết hạn...) → App Parents giữ nguyên ở màn quét QR                                                                                                                                              |
+| AF-02     | Bước 4 | Xem chi tiết profile con → hiển thị danh sách thiết bị, mỗi thiết bị: tên thiết bị, nền tảng (Android/iOS), thời điểm ghép nối, trạng thái hoạt động (*Đang sử dụng / Không sử dụng/ Mất kết nối*)                         |
+| AF-03     | Bước 4 | Thiết bị có màn hình bật và có ứng dụng chạy → hiện "Đang sử dụng"<br /><br />Thiết bị bật nhưng màn hình tắt → hiện "Không sử dụng"<br /><br />Thiết bị ngưng hoạt động → hiện "Mất kết nối" (xem định nghĩa PL-02) |
 
 **4. Quy tắc Nghiệp vụ (Business Rules)**
 
-| Business Rules | Mô tả                                                                                                                                                                                                                                                                                                                                      |
-| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BR-01          | App Parents cập nhật trạng thái ghép nối realtime và chuyển Dashboard trong ≤ 3 giây                                                                                                                                                                                                                                               |
-| BR-02          | Sau ghép nối, chi tiết profile hiển thị**danh sách thiết bị** (1 hồ sơ có thể nhiều thiết bị); mỗi thiết bị: tên, nền tảng, thời điểm ghép nối, trạng thái online/offline                                                                                                                                  |
-| BR-03          | Trạng thái online/offline được xác định bằng**heartbeat** máy con gửi về server (chi tiết định nghĩa ở Phụ lục PL-02):<br />• **Online (đang hoạt động):** heartbeat gần nhất ≤ **3 phút**<br />• **Offline (ngưng hoạt động):** > **3 phút** không nhận được heartbeat |
-| BR-04          | Trạng thái được theo dõi**độc lập cho từng thiết bị** trong hồ sơ                                                                                                                                                                                                                                                        |
+| Business Rules | Mô tả                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BR-01          | App Parents cập nhật trạng thái ghép nối realtime và chuyển vào màn hình chính trong ≤ 3 giây                                                                                                                                                                                                                                                                                                                                                                         |
+| BR-02          | Sau ghép nối, chi tiết profile hiển thị**danh sách thiết bị** (1 hồ sơ có thể nhiều thiết bị); mỗi thiết bị: tên, nền tảng, thời điểm ghép nối, trạng thái hoạt động                                                                                                                                                                                                                                                                           |
+| BR-03          | Trạng thái hoạt động được xác định bằng**heartbeat kèm trạng thái màn hình và ứng dụng** máy con gửi về server (chi tiết định nghĩa ở Phụ lục PL-02):<br />• **Đang sử dụng (Active):** có kết nối, màn hình bật và có app đang chạy.<br />• **Không sử dụng (Idle):** có kết nối nhưng màn hình tắt.<br />• **Mất kết nối (Disconnected):** > **3 phút** không nhận được heartbeat |
+| BR-04          | Trạng thái được theo dõi**độc lập cho từng thiết bị** trong hồ sơ                                                                                                                                                                                                                                                                                                                                                                                               |
 
 **5. Luồng Ngoại lệ / Lỗi (Exception / Error Flow)**
 
@@ -198,11 +198,11 @@ N/A
 
 **6. Yêu cầu Phi chức năng (NFR)**
 
-| ID     | Loại       | Mô tả                                                                                                                                 |
-| :----- | :---------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| NFR-01 | Hiệu năng | App Parents cập nhật trạng thái ghép nối và chuyển Dashboard trong ≤ 3 giây                                                   |
-| NFR-02 | Tin cậy    | Đồng bộ trạng thái realtime giữa máy con và App Parents (server push/polling)                                                   |
-| NFR-03 | Tin cậy    | Máy con gửi heartbeat định kỳ**mỗi 60 giây**; server đánh dấu offline khi quá **3 phút** không nhận heartbeat |
+| ID     | Loại       | Mô tả                                                                                                                                                                                                                                     |
+| :----- | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| NFR-01 | Hiệu năng | App Parents cập thái ghép nối và chuyển Dashboard trong ≤ 3 giây                                                                                                                                                                    |
+| NFR-02 | Tin cậy    | Đồng bộ trạng thái realtime giữa máy con và App Parents (server push/polling)                                                                                                                                                       |
+| NFR-03 | Tin cậy    | Máy con gửi heartbeat định kỳ**mỗi 60 giây** (kèm screen state và foreground app) và gửi sự kiện tức thời khi màn hình bật/tắt; server đánh dấu ngoại tuyến khi quá **3 phút** không nhận heartbeat |
 
 **7. Thiết kế giao diện**
 N/A
@@ -312,10 +312,9 @@ N/A
 
 **3. Luồng thay thế (Alternative Flow)**
 
-| ID Luồng  | Bước        | Mô tả                                                                                                                                          |
-| :--------- | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| ~~AF-01~~ | ~~Bước 3~~ | ~~Máy OEM tùy biến (Xiaomi/Oppo/Vivo) → phát hiện hãng máy, thêm bước cấp quyền tự khởi động (auto-start) tương ứng~~       |
-| AF-02      | Bước 3      | Không mở được đích danh trang setting (khác nhau giữa các bản Android) → dùng intent chuẩn, kèm hướng dẫn thao tác thủ công |
+| ID Luồng | Bước   | Mô tả                                                                                                                                          |
+| :-------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| AF-01     | Bước 3 | Không mở được đích danh trang setting (khác nhau giữa các bản Android) → dùng intent chuẩn, kèm hướng dẫn thao tác thủ công |
 
 **4. Quy tắc Nghiệp vụ (Business Rules)**
 
@@ -334,11 +333,10 @@ N/A
 
 **6. Yêu cầu Phi chức năng (NFR)**
 
-| ID          | Loại               | Mô tả                                                                                                                                               |
-| :---------- | :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| NFR-01      | Tương thích      | Trang Cài đặt khác nhau giữa các bản Android → dùng intent chuẩn; nếu không mở được đích danh thì fallback hướng dẫn thủ công |
-| ~~NFR-02~~ | ~~Tương thích~~ | ~~Phát hiện hãng máy OEM (Xiaomi/Oppo/Vivo) để thêm bước cấp quyền auto-start tương ứng~~                                              |
-| NFR-03      | Tin cậy            | Re-check toàn bộ quyền mỗi lần app quay lại foreground                                                                                          |
+| ID     | Loại          | Mô tả                                                                                                                                               |
+| :----- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| NFR-01 | Tương thích | Trang Cài đặt khác nhau giữa các bản Android → dùng intent chuẩn; nếu không mở được đích danh thì fallback hướng dẫn thủ công |
+| NFR-02 | Tin cậy       | Re-check toàn bộ quyền mỗi lần app quay lại foreground                                                                                          |
 
 **7. Thiết kế giao diện**
 N/A
@@ -393,7 +391,7 @@ N/A
 | Business Rules | Mô tả                                                                                                     |
 | :------------- | :---------------------------------------------------------------------------------------------------------- |
 | BR-01          | Tên + Tuổi là bắt buộc; Giới tính, Ảnh, SĐT là tùy chọn                                         |
-| BR-02          | 1 hồ sơ con có thể gắn nhiều thiết bị (giới hạn chung ở cấp tài khoản)                        |
+| BR-02          | 1 hồ sơ con có thể gắn nhiều thiết bị                                                               |
 | BR-03          | **Tối đa 5 thiết bị / tài khoản bố mẹ** (cộng dồn tất cả hồ sơ)                         |
 | BR-04          | Cho phép trùng tên hồ sơ                                                                               |
 | BR-05          | Vô hiệu nút "Lưu" sau lần bấm đầu + idempotency ở server → chỉ tạo 1 hồ sơ, không nhân bản |
@@ -525,12 +523,11 @@ N/A
 
 **3. Luồng thay thế (Alternative Flow)**
 
-| ID Luồng | Bước   | Mô tả                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| :-------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AF-01     | Bước 2 | Xóa hồ sơ ĐANG có thiết bị<br />→ hiển thị cảnh báo mạnh "Xóa hồ sơ sẽ GỠ QUẢN LÝ toàn bộ thiết bị của con và XÓA toàn bộ dữ liệu, lịch sử hành vi liên quan. Hành động không thể hoàn tác."<br />→ khi xác nhận: gửi lệnh gỡ quản lý tới tất cả thiết bị đã ghép nối; xóa hồ sơ + liên kết thiết bị + rule gắn với hồ sơ + **log hành vi của con trên server**; hồ sơ biến mất khỏi danh sách; app con vào lại tự quay về màn hiển thị QR ghép nối; giữ nguyên bộ cài CA/MDM đã tải |
-| AF-02     | Bước 2 | Bấm "Hủy" ở dialog xác nhận → không thay đổi gì, đóng dialog                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| AF-03     | Bước 1 | Xóa tài khoản phụ huynh → xóa tài khoản của chính mình; gửi lệnh gỡ quản lý tới tất cả thiết bị; xóa toàn bộ hồ sơ + liên kết thiết bị + rule +**log hành vi trên server**; app con vào lại tự quay về màn hiển thị QR ghép nối; giữ nguyên CA/MDM                                                                                                                                                                                                                                                                                       |
-| AF-04     | Bước 4 | Xóa hồ sơ cuối cùng → quay về empty state "Chưa có hồ sơ nào. Tạo hồ sơ đầu tiên cho con"                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ID Luồng | Bước   | Mô tả                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :-------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AF-01     | Bước 2 | Xóa hồ sơ ĐANG có thiết bị<br />→ hiển thị cảnh báo "Xóa hồ sơ sẽ GỠ QUẢN LÝ toàn bộ thiết bị của con và XÓA toàn bộ dữ liệu, lịch sử hành vi liên quan. Hành động không thể hoàn tác."<br />→ khi xác nhận: gửi lệnh gỡ quản lý tới tất cả thiết bị đã ghép nối; xóa hồ sơ + liên kết thiết bị + rule gắn với hồ sơ + **log hành vi của con trên server**; hồ sơ biến mất khỏi danh sách; app con vào lại tự quay về màn hiển thị QR ghép nối; giữ nguyên bộ cài CA/MDM đã tải |
+| AF-02     | Bước 2 | Bấm "Hủy" ở dialog xác nhận → không thay đổi gì, đóng dialog                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| AF-03     | Bước 4 | Xóa hồ sơ cuối cùng → quay về empty state "Chưa có hồ sơ nào. Tạo hồ sơ đầu tiên cho con"                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 **4. Quy tắc Nghiệp vụ (Business Rules)**
 
@@ -590,19 +587,19 @@ N/A
 
 **PL-02 — Định nghĩa trạng thái hoạt động của máy con (UC-04 FR-01)**
 
-Cơ chế: máy con (App Kid) gửi **heartbeat** định kỳ về server. Server dựa vào thời điểm heartbeat gần nhất để xác định trạng thái.
+> **Cơ chế:** Máy con (App Kid) gửi **heartbeat** định kỳ kèm trạng thái màn hình (screen_state) và ứng dụng hoạt động ở trước (foreground_app) về server. Đồng thời, gửi sự kiện tức thời khi màn hình thay đổi bật/tắt (Screen ON <-> OFF) để server cập nhật trạng thái ngay lập tức.
+> (*Đang sử dụng / Không sử dụng/ Mất kết nối*)
 
-| Trạng thái                            | Điều kiện                                       | Ý nghĩa                                                                       |
-| :-------------------------------------- | :------------------------------------------------- | :------------------------------------------------------------------------------ |
-| **Online** (đang hoạt động)   | Heartbeat gần nhất**≤ 3 phút**           | App Kid còn chạy, kết nối tốt, kiểm soát còn hiệu lực                 |
-| **Offline** (ngưng hoạt động) | **> 3 phút** không nhận được heartbeat | Máy tắt / mất mạng / app bị kill / bị gỡ / quyền cốt lõi bị thu hồi |
+| Trạng thái                             | Điều kiện                                                                                                                                        | Ý nghĩa                                                                                    |
+| :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| **Đang sử dụng** (Active)       | Heartbeat gần nhất **≤ 3 phút** VÀ trạng thái màn hình là**ON** (đang bật) VÀ có ứng dụng đang hoạt động ở trước | Trẻ đang tương tác trực tiếp với thiết bị                                          |
+| **Không sử dụng** (Idle)       | Heartbeat gần nhất**≤ 3 phút** VÀ trạng thái màn hình là**OFF** (đang tắt)                                                  | Thiết bị bật nguồn, kết nối tốt, kiểm soát còn hiệu lực nhưng trẻ không dùng |
+| **Mất kết nối** (Disconnected) | **> 3 phút** không nhận được heartbeat                                                                                                  | Máy tắt / mất mạng / app bị kill / bị gỡ / quyền cốt lõi bị thu hồi              |
 
 **Tham số:**
 
 | Tham số           | Giá trị          | Ghi chú                                                                |
 | :----------------- | :----------------- | :---------------------------------------------------------------------- |
 | Chu kỳ heartbeat  | **60 giây** | Máy con gửi heartbeat về server mỗi 60s                             |
-| Ngưỡng offline   | **3 phút**  | Không có heartbeat quá 3 phút → đánh dấu offline                |
+| Ngưỡng offline   | **3 phút**  | Không có heartbeat quá 3 phút → đánh dấu ngoại tuyến          |
 | Phạm vi theo dõi | Từng thiết bị   | Trạng thái được tính độc lập cho mỗi thiết bị trong hồ sơ |
-
-> **Ghi chú:** Cảnh báo chủ động cho bố mẹ khi máy con offline / bị tamper sẽ được đặc tả ở giai đoạn sau (out-of-scope hiện tại, gắn với việc bỏ UC-02).
