@@ -1,4 +1,5 @@
 1. Còn thiếu
+
 - SRS
   - CoVe: Cùng lỗi thì phải cùng error message xuyên suốt
   - Ví dụ về SRS tốt:
@@ -7,6 +8,7 @@
   - Thêm changelog ở đầu tài liệu
 
 2. SKILL mới:
+
 - Mô tả màn hình từ design có sẵn để cho vào SRS
 - Gắn mô tả design vào doc hoàn chỉnh
 - Thêm design exractor để lấy design system
@@ -14,18 +16,18 @@
 - Review doc
 
 3. Cân nhắc
+
 - Tách SKILL viết SRS và US
 - Thêm invest cho viết US
 - Thêm skill BABOK vào SKILL_01
 
 4. Nice-to-have
+
 - /Compact cho anti và cowork
 
 5. HƯỚNG DẪN
+
 - Cài workflow sẵn để chạy /init nếu cần
-
-
-
 
 6. Gemini.md
 
@@ -47,6 +49,6 @@
 
 7. UI
 
-| Trường UI | Mô tả | Kiểu / Validate | API mapping | Database mapping |
-|---|---|---|---|---|
-| [điền `-`] | [mô tả 1 bước trong nghiệp vụ] | [loại component + rule validation] | [tên bước nghiệp vụ] · `[METHOD] [/đường-dẫn-api]` | Bảng `[tên_bảng]`: [tên_trường_tương_ứng] | 
+| Trường UI   | Mô tả                              | Kiểu / Validate                    | API mapping                                                   | Database mapping                                    |
+| ------------- | ------------------------------------ | ----------------------------------- | ------------------------------------------------------------- | --------------------------------------------------- |
+| [điền`-`] | [mô tả 1 bước trong nghiệp vụ] | [loại component + rule validation] | [tên bước nghiệp vụ] ·`[METHOD] [/đường-dẫn-api]` | Bảng`[tên_bảng]`: [tên_trường_tương_ứng] |
