@@ -39,6 +39,7 @@ Present scope in this exact format:
 ```
 
 Then ask:
+
 > "Đúng yêu cầu chưa? Nếu đúng, muốn viết loại tài liệu nào: (BRD / Use Case Spec / User Story)"
 
 ---

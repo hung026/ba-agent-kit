@@ -1,6 +1,6 @@
 # User story template
 
-## Rules:**
+## Rules:
 
 - Sections that contains "(Optional)" in section header can be skipped if there is no information, or is not required by user
 
@@ -91,15 +91,15 @@ And tôi thấy một liên kết đến trang login
 
 3. **Exception & Edge Cases**:
 
-| Loại   | Title                    | Error message                                                                 | Trigger                                            |
-| :----- | :------------------------ | :---------------------------------------------------------------------------- | :---------------------------------------------------- |
-| Toast  |                           | "Email bị chậm, kiểm tra thư rác. Không nhận được? Nhấn gửi lại" | Email service lỗi                                 |
-| Popup  | Email đã tồn tại       | "Email này vừa mới được đăng ký. Vui lòng đăng nhập"             | Đăng ký trùng lặp khi đang xử lý             |
-| Inline |                           | "Vui lòng nhập địa chỉ email hợp lệ"                                   | Định dạng email không hợp lệ                   |
-| Inline |                           | ""                                                                            | Tấn công SQL injection                            |
-| Popup  | Quá nhiều lần thử     | "Quá nhiều lần thử. Vui lòng thử lại sau [X] phút"                    | Vượt quá Rate limit                              |
-| Toast  |                           | "Mất kết nối. Thử lại sau ít phút"                                     | Network timeout                                       |
-| Inline |                           | "Vui lòng nhập email hợp lệ"                                              | Định dạng email không hợp lệ                   |
+| Loại  | Title                 | Error message                                                                 | Trigger                                  |
+| :----- | :-------------------- | :---------------------------------------------------------------------------- | :--------------------------------------- |
+| Toast  |                       | "Email bị chậm, kiểm tra thư rác. Không nhận được? Nhấn gửi lại" | Email service lỗi                       |
+| Popup  | Email đã tồn tại  | "Email này vừa mới được đăng ký. Vui lòng đăng nhập"             | Đăng ký trùng lặp khi đang xử lý |
+| Inline |                       | "Vui lòng nhập địa chỉ email hợp lệ"                                   | Định dạng email không hợp lệ       |
+| Inline |                       | ""                                                                            | Tấn công SQL injection                 |
+| Popup  | Quá nhiều lần thử | "Quá nhiều lần thử. Vui lòng thử lại sau [X] phút"                    | Vượt quá Rate limit                   |
+| Toast  |                       | "Mất kết nối. Thử lại sau ít phút"                                     | Network timeout                          |
+| Inline |                       | "Vui lòng nhập email hợp lệ"                                              | Định dạng email không hợp lệ       |
 
 4. **Technical Context & NFR**:
 
